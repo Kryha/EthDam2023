@@ -63,7 +63,7 @@ export const TopComments = (props: { messages: Message[] }) => {
     );
 
     const sortedMessages = extendedMessages.sort((a, b) => {
-      return a.count - b.count;
+      return b.count - a.count;
     });
 
     setSortedMessages(sortedMessages);
