@@ -24,12 +24,6 @@ theme.components = {
 				borderRadius: "32px",
 			},
 		},
-		// variants: [
-		// 	{
-		// 		props: "comment",
-		// 		style: {},
-		// 	},
-		// ],
 	},
 	MuiButton: {
 		styleOverrides: {

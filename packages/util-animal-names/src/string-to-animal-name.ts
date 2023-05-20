@@ -1,10 +1,5 @@
-import fs from "fs";
-import path from "path";
+import { animalNames } from "./animal-names";
 
-const animalNames = fs
-  .readFileSync(path.join(__dirname, "animal-names.txt"))
-  .toString()
-  .split("\n");
 const animalNamesLength = animalNames.length;
 
 export function stringToAnimalName(s: string) {
@@ -15,5 +10,5 @@ export function stringToAnimalName(s: string) {
   }
 
   const animalIndex = total % animalNamesLength;
-  return animalNames[animalIndex]
+  return animalNames[animalIndex];
 }
