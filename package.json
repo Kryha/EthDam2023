@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build --workspaces --if-present",
-    "start-ssb": "npx ssb-server start"
   },
   "repository": {
     "type": "git",
@@ -26,7 +25,6 @@
   ],
   "devDependencies": {
     "cpy-cli": "4.2.0",
-    "del-cli": "5.0.0",
-    "ssb-server": "^15.3.0"
+    "del-cli": "5.0.0"
   }
 }
