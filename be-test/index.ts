@@ -8,6 +8,8 @@ async function main() {
     console.log(msg.content);
   });
 
+  console.log(await ssb.whoami());
+
   ssb.postMessage({ message: "test1", username: stringToAnimalName("poep") });
 
   ssb.postMessage({ message: "test2", username: stringToAnimalName("poep") });

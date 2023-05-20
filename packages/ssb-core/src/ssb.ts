@@ -1,6 +1,8 @@
 import pull from "pull-stream";
 import { z } from "zod";
 import { SBConnection, MessageContent, Message } from "@blockbusters/ssb-types";
+// @ts-ignore
+import ssbClient from "ssb-client";
 
 const MESSAGE_TYPE = "message";
 const ALLOWED_MESSAGE_TYPES = [MESSAGE_TYPE] as const;
@@ -29,12 +31,12 @@ function isScuttleBotMessage(unknown: unknown): unknown is ScuttleBotMessage {
   return success;
 }
 
-let connection: SBConnection;
-export function setConnection(con: SBConnection) {
-  connection = con;
+const connection = connect();
+function connect(): SBConnection {
+  return ssbClient();
 }
 
-export async function postMessage(message: MessageContent) {
+export async function postMessage(message: MessageContent): Promise<string> {
   const sbot = await connection;
 
   return new Promise((resolve, reject) => {
@@ -43,7 +45,13 @@ export async function postMessage(message: MessageContent) {
         type: MESSAGE_TYPE,
         text: JSON.stringify(message),
       },
-      resolve
+      (err: Error, msg: ScuttleBotMessage) => {
+        if (err) {
+          reject(err)
+          return
+        }
+        resolve(msg.key);
+      }
     );
   });
 }
@@ -97,7 +105,7 @@ export async function readMessages(
   _genericStream(cb, MESSAGE_TYPE, options || {});
 }
 
-export async function whoami() {
+export async function whoami(): Promise<{ id: string }> {
   const sbot = await connection;
   return sbot.whoami();
 }
