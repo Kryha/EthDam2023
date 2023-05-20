@@ -75,10 +75,10 @@ export function BasicTabs() {
 				</MUITabs>
 			</Stack>
 			<TabPanel value={value} index={0}>
-				<Comments />
+				<TopComments />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				<TopComments />
+				<Comments />
 			</TabPanel>
 		</Stack>
 	);
