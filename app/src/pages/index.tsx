@@ -1,4 +1,4 @@
-import { Paper, Stack, TextField } from "@mui/material";
+import { Box, Button, Chip, IconButton, Paper, Slider, Stack, TextField, Tooltip } from "@mui/material";
 import Head from "next/head";
 import screen from "../../public/screen.gif";
 import Image from "next/image";
@@ -44,6 +44,7 @@ export default function Home() {
 							/>
 						</Stack>
 					</Stack>
+
 					<Chat />
 				</Stack>
 			</Stack>
