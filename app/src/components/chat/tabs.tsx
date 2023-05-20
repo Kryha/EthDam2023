@@ -58,18 +58,16 @@ export function BasicTabs() {
 	};
 
 	return (
-		<Stack sx={{ flexGrow: 1, position: "relative", overflow: "scroll" }}>
+		<Stack sx={{ flexGrow: 1, position: "relative", overflow: "scroll", borderBottom: 1 }}>
 			<Stack
 				spacing={2}
 				direction="row"
 				sx={{
-					bottom: 1,
 					flexGrow: 1,
 					height: 1,
 					maxHeight: 55,
 					alignItems: "center",
 					borderBottom: 1,
-					borderColor: "divider",
 				}}
 			>
 				<ArrowForwardIosRounded color="secondary" />
