@@ -15,7 +15,12 @@ export const useContractConnectPost = () => {
         MessageVoting.abi,
         signer
       );
-      await contract.postMessage(messageContent, messageId);
+      const transaction = await contract.postMessage(messageContent, messageId);
+      const transactionReceipt = await transaction.wait();
+      if (transactionReceipt.status !== 1) {
+        alert("error message");
+        return;
+      }
       return contract;
     }
   };
@@ -36,6 +41,12 @@ export const useContractConnectUpvote = () => {
         signer
       );
       await contract.upvote(messageId, amount);
+      const transaction = await contract.upvote(messageId);
+      const transactionReceipt = await transaction.wait();
+      if (transactionReceipt.status !== 1) {
+        alert("error message");
+        return;
+      }
       return contract;
     }
   };
@@ -56,6 +67,12 @@ export const useContractConnectDownvote = () => {
         signer
       );
       await contract.downvote(messageId, amount);
+      const transaction = await contract.downvote(messageId);
+      const transactionReceipt = await transaction.wait();
+      if (transactionReceipt.status !== 1) {
+        alert("error message");
+        return;
+      }
       return contract;
     }
   };
@@ -75,7 +92,13 @@ export const useContractGetMessageById = () => {
         MessageVoting.abi,
         signer
       );
-      await contract.getMessageById(messageId);
+      const transaction = await contract.getMessageById(messageId);
+      console.log("transaction", transaction);
+      //const transactionReceipt = await transaction.wait();
+      // if (transactionReceipt.status !== 1) {
+      //     alert('error message');
+      //     return;
+      // }
       return contract;
     }
   };
