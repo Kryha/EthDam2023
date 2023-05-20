@@ -1,73 +1,60 @@
-import { ethers } from 'hardhat';
-import { expect } from 'chai';
-import { Contract } from 'ethers';
+import { ethers } from "hardhat";
+import { Signer, Contract } from "ethers";
+import { expect } from "chai";
 
-describe('MessageVoting', () => {
-  let messageVoting: Contract;
+describe("MessageVoting", function () {
+  let voteContract: Contract;
 
-  beforeEach(async () => {
-    const MessageVoting = await ethers.getContractFactory('MessageVoting');
-    messageVoting = await MessageVoting.deploy();
-    await messageVoting.deployed();
+  before(async () => {
+    const MessageVoting = await ethers.getContractFactory("MessageVoting");
+    voteContract = await MessageVoting.deploy();
+    await voteContract.deployed();
   });
 
-  it('should post a message', async () => {
-    const content = 'Hello, world!';
-    const messageId = '123';
-    
-    await messageVoting.postMessage(content, messageId);
+  it("should upvote a message and return correct vote count", async function () {
+    const messageId = "ABC";
+    const voteCount = 10;
 
-    const message = await messageVoting.getMessageById(messageId);
-    expect(message.content).to.equal(content);
-    expect(message.votes).to.equal(0);
-    expect(message.messageId).to.equal(messageId);
+    await voteContract.upvote(messageId, voteCount);
+
+    const expectedVoteCount = voteCount;
+    const messageVoteCount = await voteContract.getMessageById(messageId);
+    expect(messageVoteCount.toNumber()).to.equal(expectedVoteCount);
   });
 
-  it('should upvote a message', async () => {
-    const content = 'Hello, world!';
-    const messageId = '123';
+  it("should downvote a message and return correct vote count", async function () {
+    const messageId = "DEF";
+    const voteCount = 5;
 
-    await messageVoting.postMessage(content, messageId);
-    await messageVoting.upvote(messageId);
+    await voteContract.downvote(messageId, voteCount);
 
-    const message = await messageVoting.getMessageById(messageId);
-    expect(message.votes).to.equal(1);
+    const expectedVoteCount = -voteCount;
+    const messageVoteCount = await voteContract.getMessageById(messageId);
+    expect(messageVoteCount.toNumber()).to.equal(expectedVoteCount);
   });
 
-  it('should downvote a message', async () => {
-    const content = 'Hello, world!';
-    const messageId = '123';
+  it("should return the correct vote count for a message", async function () {
+    const messageId = "GHI";
+    const initialVoteCount = 0;
 
-    await messageVoting.postMessage(content, messageId);
-    await messageVoting.downvote(messageId);
+    const expectedVoteCount = initialVoteCount;
+    const initialMessageVoteCount = await voteContract.getMessageById(
+      messageId
+    );
+    expect(initialMessageVoteCount.toNumber()).to.equal(expectedVoteCount);
 
-    const message = await messageVoting.getMessageById(messageId);
-    expect(message.votes).to.equal(-1);
-  });
+    const upvoteCount = 7;
+    await voteContract.upvote(messageId, upvoteCount);
+    const upvotedVoteCount = expectedVoteCount + upvoteCount;
+    const upvotedMessageVoteCount = await voteContract.getMessageById(
+      messageId
+    );
+    expect(upvotedMessageVoteCount.toNumber()).to.equal(upvotedVoteCount);
 
-  it('should get sorted messages by votes', async () => {
-    const content1 = 'Message 1';
-    const content2 = 'Message 2';
-    const content3 = 'Message 3';
-    const messageId1 = '1';
-    const messageId2 = '2';
-    const messageId3 = '3';
-
-    await messageVoting.postMessage(content1, messageId1);
-    await messageVoting.postMessage(content2, messageId2);
-    await messageVoting.postMessage(content3, messageId3);
-
-    await messageVoting.upvote(messageId1);
-    await messageVoting.upvote(messageId2);
-    await messageVoting.upvote(messageId2);
-    await messageVoting.downvote(messageId3);
-
-    const sortedMessages = await messageVoting.getSortedMessagesByVotes();
-
-    console.log(sortedMessages);
-
-    expect(sortedMessages[0].messageId).to.equal(messageId2);
-    expect(sortedMessages[1].messageId).to.equal(messageId1);
-    expect(sortedMessages[2].messageId).to.equal(messageId3);
+    const downvoteCount = 3;
+    await voteContract.downvote(messageId, downvoteCount);
+    const finalVoteCount = upvotedVoteCount - downvoteCount;
+    const finalMessageVoteCount = await voteContract.getMessageById(messageId);
+    expect(finalMessageVoteCount.toNumber()).to.equal(finalVoteCount);
   });
 });
