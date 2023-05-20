@@ -1,1 +1,2 @@
-export * from "./contract-connect";
+export * from "./Web3connect";
+export * from "./contract-call";

@@ -17,12 +17,7 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    hardhat: {
-      accounts: {
-        mnemonic: WALLET_MNEMONIC,
-        initialIndex: 1,
-      },
-    },
+    hardhat: {},
   },
 };
 

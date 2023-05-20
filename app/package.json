@@ -16,6 +16,7 @@
     "@types/node": "20.1.4",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
+    "@walletconnect/web3-provider": "^1.8.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
     "ethers": "^6.3.0",
@@ -23,6 +24,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "web3modal": "^1.9.12",
+    "zustand": "^4.3.8"
   }
 }
