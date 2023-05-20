@@ -21,9 +21,9 @@ numPeer = 5
 numRepl = 10
 
 # Enable sending local UDP broadcasts
-localadv = true
+localadv = false
 # Enable connecting to incoming UDP broadcasts
-localdiscov = true
+localdiscov = false
 # Enable syncing by using epidemic-broadcast-trees (EBT)
 enable-ebt = false
 # Bypass graph auth and fetch remote's feed, useful for pubs that are restoring their data from peers. Caveats abound, however.
