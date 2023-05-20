@@ -75,10 +75,16 @@ export const useContractGetMessageById = () => {
         MessageVoting.abi,
         signer
       );
-      await contract.getMessageById(messageId);
-      return contract;
+      const transaction = await contract.getMessageById(messageId);
+      return transaction;
     }
   };
 
-  return { callGetMessageById };
+  const getVoteCountByMessageId = async (messageId: string) => {
+    const tr = await callGetMessageById(messageId);
+    const votes = Number(tr[1]);
+    return votes; 
+  }
+
+  return { callGetMessageById, getVoteCountByMessageId };
 };

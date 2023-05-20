@@ -5,6 +5,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { Message } from "@blockbusters/ssb-types";
 import { getVoteCountByMessageId } from "@services/get-vote-count";
+import { useContractGetMessageById } from "@/services";
 import { useMemo, useState } from "react";
 
 export const getMemes = async (): Promise<boolean> => {
@@ -39,7 +40,7 @@ type ExtendedMessage = Message & { count: number };
 
 export const TopComments = (props: { messages: Message[] }) => {
 	const { messages } = props;
-	// console.log({ messages });
+	const { getVoteCountByMessageId } = useContractGetMessageById();
 	const [sortedMessages, setSortedMessages] = useState<ExtendedMessage[]>([]);
 
 	useMemo(async () => {
