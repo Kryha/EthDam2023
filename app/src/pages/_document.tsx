@@ -14,7 +14,7 @@ export default function Document() {
 					// background: "linear-gradient(45deg,#a2da89,#6bb94e)",
 					perspective: "170px",
 					zIndex: 0,
-					// overflow: "hidden",.
+					// overflow: "hidden",
 					"&::before": {
 						content: "''",
 						position: "absolute",

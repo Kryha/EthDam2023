@@ -1,8 +1,9 @@
-import { Box, Button, Chip, IconButton, Slider, Stack, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Chip, IconButton, Paper, Slider, Stack, TextField, Tooltip } from "@mui/material";
 import Head from "next/head";
-import { useState } from "react";
 import { Chat } from "@components";
 import { Delete } from "@mui/icons-material";
+import screen from "../../public/screen.gif";
+import Image from "next/image";
 
 export default function Home() {
 	return (
@@ -13,87 +14,37 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Stack component="main">
+			<Stack component="main" sx={{ maxHeight: "100vh" }}>
 				<Stack justifyContent="center" alignItems="center" sx={{ border: 1, height: 80 }}>
 					<TextField id="outlined-basic" label="Search" variant="outlined" sx={{ width: 1, maxWidth: 400 }} />
 				</Stack>
-				<Stack component="section" role="livestream" direction="row" sx={{ border: 1, flexGrow: 1 }}>
-					<Stack component="section" role="screen" sx={{ border: 1, flexGrow: 1 }}>
-						<Button variant="contained">contained</Button>
-						<Button variant="outlined">outlined</Button>
-						<Button variant="text">text</Button>
-						<TextField id="outlined-basic" label="Outlined" variant="outlined" />
-						<TextField id="filled-basic" label="Filled" variant="filled" />
-						<TextField id="standard-basic" label="Standard" variant="standard" />
-						<Chip label="Chip Filled" />
-						<Chip label="Chip Outlined" variant="outlined" />
-						<Slider defaultValue={1} step={1} marks min={0} valueLabelDisplay="auto" max={10} />
-						<Tooltip title="Delete">
-							<IconButton>
-								<Delete />
-							</IconButton>
-						</Tooltip>
-						<BasicTabs />
+				<Stack component="section" role="livestream" direction="row" sx={{ border: 1, maxHeight: "calc(100vh - 80px)", justifyContent: "center" }}>
+					<Stack justifyContent="center" alignItems="center" sx={{ flexGrow: 1 }}>
+						<Stack
+							component={Paper}
+							role="screen"
+							sx={{
+								position: "relative",
+								width: 1,
+								aspectRatio: 3 / 2,
+								objectFit: "cover",
+								overflow: "hidden",
+								alignItems: "center",
+							}}
+						>
+							<Image
+								src={screen}
+								layout="responsive"
+								width="100%"
+								height="62.5%" // 16:10 aspect ratio
+								objectFit="cover"
+							/>
+						</Stack>
 					</Stack>
+
 					<Chat />
 				</Stack>
 			</Stack>
 		</>
-	);
-}
-
-interface TabPanelProps {
-	children?: React.ReactNode;
-	index: number;
-	value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-	const { children, value, index, ...other } = props;
-
-	return (
-		<div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
-		</div>
-	);
-}
-
-function a11yProps(index: number) {
-	return {
-		id: `simple-tab-${index}`,
-		"aria-controls": `simple-tabpanel-${index}`,
-	};
-}
-
-export function BasicTabs() {
-	const [value, setValue] = useState(0);
-
-	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		setValue(newValue);
-	};
-
-	return (
-		<Box sx={{ width: "100%" }}>
-			<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-				<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-					<Tab label="Item One" {...a11yProps(0)} />
-					<Tab label="Item Two" {...a11yProps(1)} />
-					<Tab label="Item Three" {...a11yProps(2)} />
-				</Tabs>
-			</Box>
-			<TabPanel value={value} index={0}>
-				Item One
-			</TabPanel>
-			<TabPanel value={value} index={1}>
-				Item Two
-			</TabPanel>
-			<TabPanel value={value} index={2}>
-				Item Three
-			</TabPanel>
-		</Box>
 	);
 }

@@ -18,6 +18,27 @@ theme.components = {
 			fontFamily: font.style.fontFamily,
 		},
 	},
+	MuiPaper: {
+		styleOverrides: {
+			root: {
+				borderRadius: "32px",
+			},
+		},
+	},
+	MuiButton: {
+		styleOverrides: {
+			root: {
+				borderRadius: "32px",
+			},
+		},
+	},
+	MuiInputBase: {
+		styleOverrides: {
+			root: {
+				borderRadius: "32px !important",
+			},
+		},
+	},
 };
 
 theme.typography = {
