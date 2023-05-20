@@ -6,11 +6,9 @@ const {
 async function main() {
   const connection = connect()
 
-  console.log(connection)
-
   ssb.setConnection(connection)
 
-  await ssb.postMessage({
+  ssb.postMessage({
     message: "test0",
     username: "poep"
   });
