@@ -54,7 +54,9 @@ export const getComments = async (): Promise<ApiGetMessage> => {
 };
 
 export function BasicTabs() {
-  const { data } = useQuery(["comments"], getComments);
+  const { data } = useQuery(["comments"], getComments, {
+    refetchInterval: 250,
+  });
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
