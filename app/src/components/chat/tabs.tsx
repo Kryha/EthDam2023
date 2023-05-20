@@ -1,5 +1,5 @@
-import { ArrowBackIosNewRounded } from "@mui/icons-material";
-import { Box, Chip, Stack, Tab, Tabs as MUITabs, Typography, Paper } from "@mui/material";
+import { ArrowForwardIosRounded } from "@mui/icons-material";
+import { Stack, Tab, Tabs as MUITabs, Typography, TabProps, TabsProps } from "@mui/material";
 import { useState } from "react";
 import { Comments } from "./comments";
 
@@ -52,10 +52,26 @@ export function BasicTabs() {
 					borderColor: "divider",
 				}}
 			>
-				<ArrowBackIosNewRounded />
-				<MUITabs value={value} onChange={handleChange} aria-label="basic tabs example" TabIndicatorProps={{ sx: { display: "none" } }}>
-					<Tab label={<Typography variant="button">Top</Typography>} {...a11yProps(0)} sx={{ borderRadius: 50 }} />
-					<Tab label={<Typography variant="button">All</Typography>} {...a11yProps(1)} sx={{ borderRadius: 50 }} />
+				<ArrowForwardIosRounded color="secondary" />
+				<MUITabs
+					value={value}
+					onChange={handleChange}
+					aria-label="basic tabs example"
+					indicatorColor="secondary"
+					TabIndicatorProps={{
+						sx: {
+							display: "none",
+
+							// width: "50px !important",
+							borderRadius: 50,
+							bottom: 0,
+							my: "auto",
+							// inset: "0 0 0 0",
+						},
+					}}
+				>
+					<StyledTabs label={<Typography variant="button">Top</Typography>} {...a11yProps(0)} />
+					<StyledTabs label={<Typography variant="button">All</Typography>} {...a11yProps(1)} />
 				</MUITabs>
 			</Stack>
 			<TabPanel value={value} index={0}>
@@ -67,3 +83,25 @@ export function BasicTabs() {
 		</Stack>
 	);
 }
+
+export const StyledTabs = ({ children, ...rest }: TabProps) => {
+	return (
+		<Tab
+			disableRipple
+			sx={{
+				zIndex: 1,
+				border: 1,
+				borderRadius: 50,
+				borderColor: "secondary.main",
+				mr: 1,
+				p: 0,
+				minHeight: "32px !important",
+				my: "auto",
+				"&.Mui-selected": {
+					bgcolor: "secondary.main",
+				},
+			}}
+			{...rest}
+		/>
+	);
+};

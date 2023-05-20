@@ -21,7 +21,8 @@ theme.components = {
 	MuiPaper: {
 		styleOverrides: {
 			root: {
-				borderRadius: "32px",
+				borderRadius: "14px",
+				border: "1px solid",
 			},
 		},
 	},

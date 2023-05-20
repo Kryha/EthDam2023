@@ -17,14 +17,15 @@ export const Form = () => {
 	};
 
 	return (
-		<Stack component="form" onSubmit={handleSubmit(onSubmit)} spacing={3} sx={{ border: 1, flexGrow: 1, maxHeight: 140, justifyContent: "center", alignItems: "center" }}>
-			<Stack direction="row">
-				<TextField {...register("message")} name="message" id="standard-basic" label="Standard" variant="standard" />
-				<Button variant="contained" type="submit">
+		<Stack component="form" onSubmit={handleSubmit(onSubmit)} spacing={3} sx={{ flexGrow: 1, maxHeight: 140, justifyContent: "center", alignItems: "center", px: 2, pt: 1, pb: 2 }}>
+			<Stack direction="row" justifyContent="space-between" sx={{ width: 1 }}>
+				<TextField {...register("message")} name="message" id="standard-basic" label="Write something" variant="standard" />
+				<Button variant="contained" color="secondary" type="submit">
 					Send
 				</Button>
 			</Stack>
-			{/* <Slider {...register("amount")} name="amount" defaultValue={1} step={1} marks min={0} valueLabelDisplay="auto" max={10} /> */}
+			{/* {...register("amount")} */}
+			<Slider color="secondary" name="amount" defaultValue={1} step={1} marks min={0} valueLabelDisplay="auto" max={10} />
 		</Stack>
 	);
 };
