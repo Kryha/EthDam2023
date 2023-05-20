@@ -29,13 +29,11 @@ export const Explosions = () => {
 						backgroundImage: "url('/confetti.gif')",
 						filter: "hue-rotate(240deg)",
 						// backgroundImage: "url('/explosion.png')",
-
 						backgroundSize: "100%",
 						// backgroundSize: "110% 200%",
 						// backgroundPositionY: "200%",
 						// animation: "move 4s infinite",
 						zIndex: 0,
-						// clipPath: "circle(30%)",
 					}}
 				></Stack>
 				<Stack
