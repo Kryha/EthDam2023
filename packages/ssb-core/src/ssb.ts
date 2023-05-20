@@ -83,7 +83,9 @@ async function _genericStream(
   const sbot = await connection;
   const { live = true, reverse = false, limit = -1 } = args;
 
-  const logStream = sbot.createLogStream({ type, live, reverse, limit });
+  console.log(sbot)
+
+  const logStream = sbot.createHistoryStream({ type, live, reverse, limit });
 
   pull(
     logStream,

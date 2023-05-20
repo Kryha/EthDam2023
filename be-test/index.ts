@@ -6,6 +6,8 @@ async function main() {
   const connection = connect();
   ssb.setConnection(connection);
 
+  await ssb.whoami()
+
   ssb.postMessage({ message: "test0", username: stringToAnimalName("poep") });
 
   ssb.readMessages((msg) => {
