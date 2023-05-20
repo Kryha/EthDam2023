@@ -1,4 +1,4 @@
-import { Paper, Stack, TextField } from "@mui/material";
+import { FilledInput, FormControl, IconButton, InputAdornment, InputLabel, Paper, Stack, TextField, Typography } from "@mui/material";
 import Head from "next/head";
 import screen from "../../public/screen.gif";
 import Image from "next/image";
@@ -6,6 +6,7 @@ import { Chat } from "@/components";
 import { Wallet } from "@/features/wallet/wallet";
 import { Reactions, TopComment } from "@features/top-comment";
 import { Explosions } from "@features/top-comment/explosion";
+import { ChevronLeft, Search } from "@mui/icons-material";
 
 export default function Home() {
 	return (
@@ -17,8 +18,18 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Stack component="main" sx={{ maxHeight: "100vh" }}>
-				<Stack direction="row" justifyContent="center" alignItems="center" sx={{ height: 80 }}>
-					<TextField id="outlined-basic" label="Search" variant="outlined" sx={{ width: 1, maxWidth: 400 }} />
+				<Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ height: 80, mx: 1 }}>
+					<IconButton sx={{ bgcolor: "#272727" }}>
+						<ChevronLeft color="secondary" />
+					</IconButton>
+					<Stack direction="row" alignItems="center" sx={{ bgcolor: "#272727", borderRadius: 50, px: 2 }}>
+						<Typography variant="button" color="secondary" sx={{ minWidth: 270 }}>
+							Search
+						</Typography>
+						<IconButton onClick={() => {}} onMouseDown={() => {}} edge="end">
+							<Search color="secondary" />
+						</IconButton>
+					</Stack>
 					<Wallet />
 				</Stack>
 				<Stack spacing={1} m={1} component="section" role="livestream" direction="row" sx={{ maxHeight: "calc(100vh - 80px)", justifyContent: "center", flexGrow: 1 }}>

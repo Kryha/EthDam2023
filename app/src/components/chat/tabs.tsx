@@ -84,6 +84,7 @@ export function BasicTabs() {
 							my: "auto",
 						},
 					}}
+					sx={{ alignItems: "center" }}
 				>
 					<StyledTabs label={<Typography variant="button">Top</Typography>} {...a11yProps(0)} />
 					<StyledTabs label={<Typography variant="button">All</Typography>} {...a11yProps(1)} />
