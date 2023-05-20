@@ -1,0 +1,39 @@
+version: "3"
+services:
+  docker-hoster:
+    image: dvdarias/docker-hoster
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+      - /etc/hosts:/tmp/hosts
+  go-ssb-1:
+    build: ./deployment/external-services/go-ssb
+    environment:
+      SSB_MUXRPC_ADDRESS: ":8008"
+      SSB_ADDR: "localhost:8008"
+      SSB_WS_ADDRESS: ":8989"
+      SSB_PROMETHEUS_ADDRESS: "localhost:6078"
+    volumes:
+      - ./deployment/external-services/go-ssb/secret-1:/root/.ssb-go/secret
+      - ./deployment/external-services/go-ssb/config.toml:/root/.ssb-go/config.toml
+      - ./deployment/dynamic-volumes/go-ssb-1:/root/.ssb-go
+  go-ssb-2:
+    build: ./deployment/external-services/go-ssb
+    environment:
+      SSB_MUXRPC_ADDRESS: ":8009"
+      SSB_ADDR: "localhost:8009"
+      SSB_WS_ADDRESS: ":8990"
+      SSB_PROMETHEUS_ADDRESS: "localhost:6079"
+    volumes:
+      - ./deployment/external-services/go-ssb/secret-2:/root/.ssb-go/secret
+      - ./deployment/external-services/go-ssb/config.toml:/root/.ssb-go/config.toml
+      - ./deployment/dynamic-volumes/go-ssb-2:/root/.ssb-go
+  go-ssb-custom:
+    build: ./deployment/external-services/go-ssb
+    environment:
+      SSB_MUXRPC_ADDRESS: ":8010"
+      SSB_WS_ADDRESS: ":8991"
+      SSB_PROMETHEUS_ADDRESS: "localhost:6080"
+      SSB_ADDR: "localhost:8010"
+    volumes:
+      - ./deployment/external-services/go-ssb/config.toml:/root/.ssb-go/config.toml
+      - ./deployment/dynamic-volumes/go-ssb-custom:/root/.ssb-go

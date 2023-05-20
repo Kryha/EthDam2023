@@ -1,0 +1,29 @@
+{
+  "name": "ethdam-priv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build --workspaces --if-present"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kryha/EthDam2023.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kryha/EthDam2023/issues"
+  },
+  "homepage": "https://github.com/Kryha/EthDam2023#readme",
+  "workspaces": [
+    "packages/ssb",
+    "packages/util-animal-names",
+    "test"
+  ],
+  "devDependencies": {
+    "cpy-cli": "4.2.0",
+    "del-cli": "5.0.0"
+  }
+}

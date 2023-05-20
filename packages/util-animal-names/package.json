@@ -1,0 +1,24 @@
+{
+  "name": "@blockbusters/util-animal-names",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "postbuild": "npx cpy --no-overwrite --cwd=./src './**/*' '!./**/*.ts*' ./dist/src",
+    "prebuild": "npx del ./dist"
+  },
+  "author": "BlockBusters",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.2.1",
+    "concurrently": "^8.0.1",
+    "nodemon": "^2.0.22",
+    "typescript": "^5.0.4",
+    "cpy-cli": "4.2.0",
+    "del-cli": "5.0.0"
+  }
+}
