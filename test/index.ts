@@ -2,12 +2,17 @@ import { stringToAnimalName } from "@blockbusters/util-animal-names";
 import * as ssb from "@blockbusters/ssb";
 
 async function main() {
-  ssb.postMessage({ message: "test", username: stringToAnimalName("poep") });
+  ssb.postMessage({ message: "test0", username: stringToAnimalName("poep") });
 
-  const messages = ssb.readMessages();
-  for await (const x of messages) {
-    console.log(x);
-  }
+  ssb.readMessages((msg) => {
+    console.log(msg.content);
+  });
+
+  ssb.postMessage({ message: "test1", username: stringToAnimalName("poep") });
+
+  ssb.postMessage({ message: "test2", username: stringToAnimalName("poep") });
+
+  ssb.postMessage({ message: "test3", username: stringToAnimalName("poep") });
 }
 
 main();

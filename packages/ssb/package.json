@@ -16,7 +16,8 @@
     "pull-stream": "^3.7.0",
     "sbot": "^0.0.3",
     "ssb-client": "^4.9.0",
-    "ssb-keys": "^8.5.0"
+    "ssb-keys": "^8.5.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",

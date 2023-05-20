@@ -1,5 +1,7 @@
 version: "3"
 services:
+  app:
+    build: ./app
   docker-hoster:
     image: dvdarias/docker-hoster
     volumes:
