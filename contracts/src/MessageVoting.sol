@@ -1,22 +1,19 @@
 pragma solidity ^0.8.9;
 
 contract MessageVoting {
-    mapping(bytes32 => int) public voteCount;
+    mapping(string => int) public voteCount;
 
     function upvote(string memory _messageId, int _voteCount) public {
-        bytes32 messageIdHash = keccak256(abi.encodePacked(_messageId));
-        voteCount[messageIdHash] += _voteCount;
+        voteCount[_messageId] += _voteCount;
     }
 
     function downvote(string memory _messageId, int _voteCount) public {
-        bytes32 messageIdHash = keccak256(abi.encodePacked(_messageId));
-        voteCount[messageIdHash] -= _voteCount;
+        voteCount[_messageId] -= _voteCount;
     }
 
     function getMessageById(
         string memory _messageId
     ) public view returns (int) {
-        bytes32 messageIdHash = keccak256(abi.encodePacked(_messageId));
-        return voteCount[messageIdHash];
+        return voteCount[_messageId];
     }
 }
