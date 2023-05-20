@@ -1,16 +1,14 @@
 import { stringToAnimalName } from "@blockbusters/util-animal-names";
 import * as ssb from "@blockbusters/ssb-core";
-import { connect } from "@blockbusters/ssb-backend";
 
 async function main() {
-  const connection = connect();
-  ssb.setConnection(connection);
-
   ssb.postMessage({ message: "test0", username: stringToAnimalName("poep") });
 
   ssb.readMessages((msg) => {
     console.log(msg.content);
   });
+
+  console.log(await ssb.whoami());
 
   ssb.postMessage({ message: "test1", username: stringToAnimalName("poep") });
 

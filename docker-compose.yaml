@@ -10,25 +10,27 @@ services:
   go-ssb-1:
     build: ./deployment/external-services/go-ssb
     environment:
-      SSB_MUXRPC_ADDRESS: ":8008"
-      SSB_ADDR: "localhost:8008"
+      SSB_MUXRPC_ADDRESS: "ethdam2023-go-ssb-1-1:8008"
+      SSB_ADDR: "ethdam2023-go-ssb-1-1:8008"
       SSB_WS_ADDRESS: ":8989"
       SSB_PROMETHEUS_ADDRESS: "localhost:6078"
     volumes:
       - ./deployment/external-services/go-ssb/secret-1:/root/.ssb-go/secret
       - ./deployment/external-services/go-ssb/config.toml:/root/.ssb-go/config.toml
+      - ./deployment/external-services/go-ssb/scripts/:/SCRIPTZ/
       - ./deployment/dynamic-volumes/go-ssb-1:/root/.ssb-go
   go-ssb-2:
     build: ./deployment/external-services/go-ssb
     environment:
-      SSB_MUXRPC_ADDRESS: ":8009"
-      SSB_ADDR: "localhost:8009"
+      SSB_MUXRPC_ADDRESS: "ethdam2023-go-ssb-2-1:8009"
+      SSB_ADDR: "ethdam2023-go-ssb-2-1:8009"
       SSB_WS_ADDRESS: ":8990"
       SSB_PROMETHEUS_ADDRESS: "localhost:6079"
     volumes:
       - ./deployment/external-services/go-ssb/secret-2:/root/.ssb-go/secret
       - ./deployment/external-services/go-ssb/config.toml:/root/.ssb-go/config.toml
       - ./deployment/dynamic-volumes/go-ssb-2:/root/.ssb-go
+      - ./deployment/external-services/go-ssb/scripts/:/SCRIPTZ/
         #  go-ssb-custom:
         #    build: ./deployment/external-services/go-ssb
         #    environment:

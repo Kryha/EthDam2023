@@ -8,6 +8,4 @@ RUN go install /usr/go-ssb/cmd/go-sbot
 RUN go install /usr/go-ssb/cmd/sbotcli
 RUN echo 'export PATH=$PATH:${HOME}/go/bin' >> ~/.bashrc
 
-COPY ./scripts ./SCRIPTZ
-
 CMD ["go-sbot"]

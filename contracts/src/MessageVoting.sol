@@ -3,30 +3,37 @@ pragma solidity ^0.8.9;
 contract MessageVoting {
     struct Message {
         string content;
-        uint256 votes;
+        int256 votes;
+        string messageId;
     }
 
     Message[] public messages;
 
-    function postMessage(string memory _content) public {
+    function postMessage(string memory _content, string memory _messageId) public {
         Message memory newMessage = Message({
             content: _content,
-            votes: 0
+            votes: 0,
+            messageId: _messageId
         });
         messages.push(newMessage);
     }
 
-    function upvote(uint256 _messageIndex) public {
-        require(_messageIndex < messages.length, "Invalid message index");
-        messages[_messageIndex].votes++;
+    function upvote(string memory _messageId) public {
+        uint256 messageIndex = _findMessageIndex(_messageId);
+        messages[messageIndex].votes++;
     }
 
-    function downvote(uint256 _messageIndex) public {
-        require(_messageIndex < messages.length, "Invalid message index");
-        messages[_messageIndex].votes--;
+    function downvote(string memory _messageId) public {
+        uint256 messageIndex = _findMessageIndex(_messageId);
+        messages[messageIndex].votes--;
     }
 
-    function getMessagesByVotes() public view returns (Message[] memory) {
+    function getMessageById(string memory _messageId) public view returns (Message memory) {
+        uint256 messageIndex = _findMessageIndex(_messageId);
+        return messages[messageIndex];
+    }
+
+    function getSortedMessagesByVotes() public view returns (Message[] memory) {
         uint256 length = messages.length;
         Message[] memory sortedMessages = new Message[](length);
         for (uint256 i = 0; i < length; i++) {
@@ -44,5 +51,15 @@ contract MessageVoting {
         }
 
         return sortedMessages;
+    }
+
+    function _findMessageIndex(string memory _messageId) private view returns (uint256) {
+        bytes32 messageIdHash = keccak256(abi.encodePacked(_messageId));
+        for (uint256 i = 0; i < messages.length; i++) {
+            if (keccak256(abi.encodePacked(messages[i].messageId)) == messageIdHash) {
+                return i;
+            }
+        }
+        revert("Message not found");
     }
 }

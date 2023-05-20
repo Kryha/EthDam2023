@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@blockbusters/ssb-types": "^1.0.0",
+    "@blockbusters/util-animal-names": "^1.0.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
@@ -17,6 +19,7 @@
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "@walletconnect/web3-provider": "^1.8.0",
+    "axios": "^1.4.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
     "ethers": "^6.3.0",
@@ -26,6 +29,7 @@
     "react-hook-form": "^7.43.9",
     "typescript": "5.0.4",
     "web3modal": "^1.9.12",
-    "zustand": "^4.3.8"
+    "zustand": "^4.3.8",
+    "react-query": "^3.39.3"
   }
 }
