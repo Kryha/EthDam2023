@@ -6,7 +6,7 @@ import { useStore } from "@/store";
 export const useContractConnect = () => {
   const client = useStore((state) => state.client);
 
-  const call = useCallback(async () => {
+  const callPostMessage = async (messageContent: string, messageId: string) => {
     if (client?.isConnected) {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
@@ -15,15 +15,26 @@ export const useContractConnect = () => {
         MessageVoting.abi,
         signer
       );
-      try {
-        const functionFragment = contract.interface.getFunction("downvote");
-        console.log(functionFragment);
-      } catch (e) {
-        console.log(e);
+      const transaction = await contract.postMessage(messageContent, messageId);
+      const transactionReceipt = await transaction.wait();
+      if (transactionReceipt.status !== 1) {
+          alert('error message');
+          return;
       }
+
+      const transaction2 = await contract.getSortedMessagesByVotes();
+      const transactionReceipt2 = await transaction2.wait();
+      console.log("tr2", transactionReceipt2);
+      console.log("tr2", JSON.stringify(transactionReceipt2));
+      if (transactionReceipt2.status !== 1) {
+        alert('error message');
+        return;
+      }
+      console.log("t2", await transaction2);
+
       return contract;
     }
-  }, []);
+  };
 
-  return { call };
+  return { callPostMessage };
 };
