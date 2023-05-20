@@ -31,7 +31,7 @@ const cb = (msg: Message) => {
   allMessages.unshift(msg);
 };
 
-ssb.readMessages(cb);
+ssb.readMessages(cb, { limit });
 
 function GET(req: NextApiRequest, res: NextApiResponse<GetData>) {
   res.status(200).json({ top: topMessages, all: allMessages });

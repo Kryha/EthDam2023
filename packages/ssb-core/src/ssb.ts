@@ -3,6 +3,9 @@ import { z } from "zod";
 import { SBConnection, MessageContent, Message } from "@blockbusters/ssb-types";
 // @ts-ignore
 import ssbClient from "ssb-client";
+// @ts-ignore
+import ssbFeed from "ssb-feed";
+import ssbKeys from "ssb-keys";
 
 const MESSAGE_TYPE = "message";
 const ALLOWED_MESSAGE_TYPES = [MESSAGE_TYPE] as const;
@@ -36,11 +39,17 @@ function connect(): SBConnection {
 	return ssbClient();
 }
 
-export async function postMessage(message: MessageContent): Promise<string> {
+type PostOptions = {ssbKeys?: ssbKeys.Keys}
+export async function postMessage(message: MessageContent, options?: PostOptions): Promise<string> {
 	const sbot = await connection;
 
+	let feed = sbot
+	if (options?.ssbKeys) {
+		feed = ssbFeed(sbot, ssbKeys.generate())
+	}
+
 	return new Promise((resolve, reject) => {
-		sbot.publish(
+		feed.publish(
 			{
 				type: MESSAGE_TYPE,
 				text: JSON.stringify(message),

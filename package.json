@@ -22,7 +22,8 @@
     "packages/*",
     "be-test",
     "fe-test",
-    "app"
+    "app",
+    "spam-poster"
   ],
   "devDependencies": {
     "cpy-cli": "4.2.0",
