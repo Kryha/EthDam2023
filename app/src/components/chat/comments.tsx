@@ -15,25 +15,31 @@ export const Comments = (props: { messages: Message[] }) => {
   const {} = useQuery(["avatars", getMemes]);
   return (
     <Stack spacing={2} my={2}>
-      {messages.map((msg, index) => {
+      {messages.reduceRight<JSX.Element[]>((array, msg, index) => {
         if (msg.content.special) {
-          return (
+          const el = (
             <TopComment
               key={index.toString()}
               username={msg.content.username}
               message={msg.content.message}
             />
           );
+
+          array.push(el);
+          return array;
         }
 
-        return (
+        const el = (
           <Comment
             key={index.toString()}
             username={msg.content.username}
             message={msg.content.message}
           />
         );
-      })}
+
+        array.push(el);
+        return array;
+      }, [])}
     </Stack>
   );
 };
@@ -75,13 +81,17 @@ export const TopComments = (props: { messages: Message[] }) => {
 
   return (
     <Stack spacing={2} my={2}>
-      {messages.map((msg, index) => (
-        <TopComment
-          key={index.toString()}
-          username={msg.content.username}
-          message={msg.content.message}
-        />
-      ))}
+      {messages.reduceRight<JSX.Element[]>((array, msg, index) => {
+        const el = (
+          <TopComment
+            key={index.toString()}
+            username={msg.content.username}
+            message={msg.content.message}
+          />
+        );
+        array.push(el);
+        return array;
+      }, [])}
     </Stack>
   );
 };
