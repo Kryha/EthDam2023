@@ -2,12 +2,22 @@ import { Button, Slider, Stack, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 
 type MessageContent = { message: string; special?: boolean; username: string };
+const ssb = require("@blockbusters/ssb-core");
+const { connect } = require("@blockbusters/ssb-frontend");
 
 export const Form = () => {
 	const formMethods = useForm<MessageContent>({ mode: "onChange" });
 	const { register, handleSubmit } = formMethods;
+	const connection = connect();
+
+	ssb.setConnection(connection);
 
 	const onSubmit = ({ message }: MessageContent) => {
+		ssb.postMessage({
+			message: message,
+			username: "joe",
+		});
+
 		const send = {
 			message: message,
 			special: false,
