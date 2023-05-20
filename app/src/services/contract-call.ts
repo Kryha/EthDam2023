@@ -101,7 +101,7 @@ export const useContractGetMessageById = () => {
 
   const getVoteCountByMessageId = async (messageId: string) => {
     const tr = await callGetMessageById(messageId);
-    const votes = Number(tr[1]);
+    const votes = tr || 0;
     return votes;
   };
 
