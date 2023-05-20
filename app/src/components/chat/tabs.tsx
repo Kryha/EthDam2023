@@ -1,7 +1,7 @@
 import { ArrowForwardIosRounded } from "@mui/icons-material";
 import { Stack, Tab, Tabs as MUITabs, Typography, TabProps, TabsProps } from "@mui/material";
 import { useState } from "react";
-import { Comments } from "./comments";
+import { Comments, TopComments } from "./comments";
 
 export const Tabs = () => {
 	return <BasicTabs />;
@@ -78,7 +78,7 @@ export function BasicTabs() {
 				<Comments />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				<Comments />
+				<TopComments />
 			</TabPanel>
 		</Stack>
 	);

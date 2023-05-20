@@ -4,6 +4,7 @@ import screen from "../../public/screen.gif";
 import Image from "next/image";
 import { Chat } from "@/components";
 import { Wallet } from "@/features/wallet/wallet";
+import { Reactions, TopComment } from "@features/top-comment";
 
 export default function Home() {
 	return (
@@ -19,7 +20,7 @@ export default function Home() {
 					<TextField id="outlined-basic" label="Search" variant="outlined" sx={{ width: 1, maxWidth: 400 }} />
 					<Wallet />
 				</Stack>
-				<Stack spacing={1} mx={1} component="section" role="livestream" direction="row" sx={{ maxHeight: "calc(100vh - 80px)", justifyContent: "center" }}>
+				<Stack spacing={1} m={1} component="section" role="livestream" direction="row" sx={{ maxHeight: "calc(100vh - 80px)", justifyContent: "center" }}>
 					<Stack justifyContent="center" alignItems="center" sx={{ flexGrow: 1 }}>
 						<Stack
 							component={Paper}
@@ -28,23 +29,35 @@ export default function Home() {
 								position: "relative",
 								width: 1,
 								aspectRatio: 3 / 2,
-								objectFit: "cover",
-								overflow: "hidden",
 								alignItems: "center",
+								p: 1,
 							}}
 						>
-							<Image
-								src={screen}
-								layout="responsive"
-								// @ts-ignore
-								width="100%"
-								// @ts-ignore
-								height="62.5%" // 16:10 aspect ratio
-								objectFit="cover"
-							/>
+							<Stack
+								component={Paper}
+								role="screen"
+								sx={{
+									position: "relative",
+									width: 1,
+									objectFit: "cover",
+									overflow: "hidden",
+									alignItems: "center",
+								}}
+							>
+								<TopComment />
+								<Image
+									src={screen}
+									layout="responsive"
+									// @ts-ignore
+									width="100%"
+									// @ts-ignore
+									height="62.5%" // 16:10 aspect ratio
+									objectFit="cover"
+								/>
+							</Stack>
+							<Reactions />
 						</Stack>
 					</Stack>
-
 					<Chat />
 				</Stack>
 			</Stack>
