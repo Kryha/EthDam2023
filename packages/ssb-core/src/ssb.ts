@@ -1,21 +1,20 @@
-// @ts-ignore
-import ssbClient from "ssb-client";
-import ssbKeys from "ssb-keys";
 import pull from "pull-stream";
 import { z } from "zod";
+import { SBConnection } from "@blockbusters/ssb-types";
 
 const MESSAGE_TYPE = "message";
+const ALLOWED_MESSAGE_TYPES = [MESSAGE_TYPE] as const;
 
 const scuttleBotMessageSchema = z.object({
   key: z.string(),
   value: z.object({
-    previous: z.string().optional(),
+    previous: z.string().optional().nullable(),
     sequence: z.number(),
     author: z.string(),
     timestamp: z.number(),
     hash: z.string(),
     content: z.object({
-      type: z.string(),
+      type: z.enum(ALLOWED_MESSAGE_TYPES),
       text: z.string(),
     }),
     signature: z.string(),
@@ -35,24 +34,27 @@ type Message = {
   id: string;
   content: MessageContent;
   author: string;
-  previousId?: string;
+  previousId: string | undefined | null;
   timestamp: number;
   type: string;
 };
 
-async function createConnection() {
-  const sbot = await ssbClient();
-  return sbot;
+let connection: SBConnection;
+export function setConnection(con: SBConnection) {
+  connection = con;
 }
-
-const connection = createConnection();
 
 export async function postMessage(message: MessageContent) {
   const sbot = await connection;
 
-  await sbot.publish({
-    type: MESSAGE_TYPE,
-    text: JSON.stringify(message),
+  return new Promise((resolve, reject) => {
+    sbot.publish(
+      {
+        type: MESSAGE_TYPE,
+        text: JSON.stringify(message),
+      },
+      resolve
+    );
   });
 }
 
@@ -81,7 +83,7 @@ async function _genericStream(
   const sbot = await connection;
   const { live = true, reverse = false, limit = -1 } = args;
 
-  const logStream = sbot.messagesByType({ type, live, reverse, limit });
+  const logStream = sbot.createLogStream({ type, live, reverse, limit });
 
   pull(
     logStream,

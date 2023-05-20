@@ -19,9 +19,10 @@
   },
   "homepage": "https://github.com/FilipHarald/ethdam-priv#readme",
   "workspaces": [
-    "packages/ssb",
-    "packages/util-animal-names",
-    "test"
+    "packages/*",
+    "be-test",
+    "fe-test",
+    "app"
   ],
   "devDependencies": {
     "cpy-cli": "4.2.0",
