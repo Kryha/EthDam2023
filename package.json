@@ -20,10 +20,9 @@
   "homepage": "https://github.com/FilipHarald/ethdam-priv#readme",
   "workspaces": [
     "packages/*",
-    "be-test",
-    "fe-test",
     "app",
-    "spam-poster"
+    "spam-poster",
+    "contracts"
   ],
   "devDependencies": {
     "cpy-cli": "4.2.0",
