@@ -2,7 +2,11 @@ import { Box, Button, Stack, Tooltip, Typography, Zoom } from "@mui/material";
 import { useReactionStore } from "@store/reaction";
 import { useMemo, useState } from "react";
 import hash from "object-hash";
-import { useContractConnectUpvote } from "../../services/contract-call";
+import {
+  useContractConnectUpvote,
+  useContractGetMessageById,
+} from "../../services/contract-call";
+import { useQuery } from "react-query";
 
 const REACTION_IDS = ["/pepe.gif", "/chi.gif", "/chi.gif", "/chi.gif"];
 
@@ -25,6 +29,13 @@ export const Reaction = ({ url }: { url: string }) => {
   const combinedId = hash({ url, topMessageId });
 
   const { callUpvote } = useContractConnectUpvote();
+  const { callGetMessageById } = useContractGetMessageById();
+
+  const { data: count } = useQuery(
+    "count",
+    () => callGetMessageById(combinedId),
+    { refetchInterval: 500 }
+  );
 
   const { reaction, setReaction, removeReaction } = useReactionStore(
     (state) => state
@@ -62,33 +73,8 @@ export const Reaction = ({ url }: { url: string }) => {
             backgroundSize: "cover",
           }}
         />
-        <Typography variant="h5">12</Typography>
+        <Typography variant="h5">{count || 0}</Typography>
       </Stack>
     </Button>
   );
 };
-
-{
-  /* <Tooltip
-			TransitionComponent={Zoom}
-			TransitionProps={{ easing: { enter: "cubic-bezier(.02,1.79,.31,.89)", exit: "cubic-bezier(.2,1.79,.28,.77)" }, timeout: { enter: 600, exit: 300 } }}
-			placement="top"
-			sx={{ background: "transparent" }}
-			slotProps={{ popper: { sx: { background: "transparent" } } }}
-			title={
-				<Box
-					sx={{
-						transform: "translateX(-60%)",
-						minWidth: "30rem",
-						minHeight: "30rem",
-						backgroundImage: `url${url}`,
-						backgroundRepeat: "no-repeat",
-						borderRadius: 50,
-						backgroundSize: "cover",
-					}}
-				/>
-			}
-		>
-			
-		</Tooltip> */
-}

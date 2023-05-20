@@ -83,7 +83,9 @@ export const useContractConnectDownvote = () => {
 export const useContractGetMessageById = () => {
   const client = useStore((state) => state.client);
 
-  const callGetMessageById = async (messageId: string) => {
+  const callGetMessageById = async (
+    messageId: string
+  ): Promise<number | undefined> => {
     if (client?.isConnected) {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
