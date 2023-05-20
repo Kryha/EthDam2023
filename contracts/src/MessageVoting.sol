@@ -3,7 +3,7 @@ pragma solidity ^0.8.9;
 contract MessageVoting {
     struct Message {
         string content;
-        uint256 votes;
+        int256 votes;
         string messageId;
     }
 
