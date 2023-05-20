@@ -18,8 +18,8 @@ export const useContractConnectPost = () => {
       const transaction = await contract.postMessage(messageContent, messageId);
       const transactionReceipt = await transaction.wait();
       if (transactionReceipt.status !== 1) {
-          alert('error message');
-          return;
+        console.error(transactionReceipt);
+        return;
       }
       return contract;
     }
@@ -43,8 +43,8 @@ export const useContractConnectUpvote = () => {
       const transaction = await contract.upvote(messageId);
       const transactionReceipt = await transaction.wait();
       if (transactionReceipt.status !== 1) {
-          alert('error message');
-          return;
+        console.error(transactionReceipt);
+        return;
       }
       return contract;
     }
@@ -52,7 +52,6 @@ export const useContractConnectUpvote = () => {
 
   return { callUpvote };
 };
-
 
 export const useContractConnectDownvote = () => {
   const client = useStore((state) => state.client);
@@ -69,8 +68,8 @@ export const useContractConnectDownvote = () => {
       const transaction = await contract.downvote(messageId);
       const transactionReceipt = await transaction.wait();
       if (transactionReceipt.status !== 1) {
-          alert('error message');
-          return;
+        console.error(transactionReceipt);
+        return;
       }
       return contract;
     }
@@ -78,7 +77,6 @@ export const useContractConnectDownvote = () => {
 
   return { callDownvote };
 };
-
 
 export const useContractGetMessageById = () => {
   const client = useStore((state) => state.client);
@@ -93,10 +91,10 @@ export const useContractGetMessageById = () => {
         signer
       );
       const transaction = await contract.getMessageById(messageId);
-      console.log("transaction", transaction)
+      console.log("transaction", transaction);
       //const transactionReceipt = await transaction.wait();
       // if (transactionReceipt.status !== 1) {
-      //     alert('error message');
+      //     console.error(transactionReceipt)
       //     return;
       // }
       return contract;

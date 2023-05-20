@@ -1,5 +1,10 @@
 import { Button, Slider, Stack, TextField } from "@mui/material";
+import {
+  useContractConnectPost,
+  useContractConnectUpvote,
+} from "@services/contract-call";
 import axios from "axios";
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
@@ -11,19 +16,30 @@ export const postMessage = async ({
 }: {
   message: string;
   special: boolean;
-}): Promise<boolean> => {
+}): Promise<string> => {
   const response = await axios.post("api/message", { message, special });
-  return response.data;
+  return response.data.messageId;
 };
 
 export const Form = () => {
-  const { mutate: post } = useMutation(postMessage);
+  const { data: messageId, mutate: post } = useMutation(postMessage);
   const formMethods = useForm<MessageContent>({ mode: "onChange" });
   const { register, handleSubmit } = formMethods;
 
-  const onSubmit = ({ message, amount }: MessageContent) => {
+  const { callPostMessage } = useContractConnectPost();
+  const { callUpvote } = useContractConnectUpvote();
+
+  const onSubmit = async ({ message, amount }: MessageContent) => {
     post({ message: message, special: amount > 0 });
   };
+
+  useMemo(async () => {
+    if (messageId) {
+      console.log(messageId);
+      await callPostMessage("", messageId);
+      await callUpvote(messageId);
+    }
+  }, [messageId]);
 
   return (
     <Stack
