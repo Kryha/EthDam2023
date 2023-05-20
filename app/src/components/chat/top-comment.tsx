@@ -2,6 +2,10 @@ import { North, South } from "@mui/icons-material";
 import { Avatar, IconButton, Paper, Stack, Typography } from "@mui/material";
 import { getVoteCountByMessageId } from "@services/get-vote-count";
 import React, { useContext, useEffect, useMemo, useState } from "react";
+import {
+  useContractConnectDownvote,
+  useContractConnectUpvote,
+} from "../../services/contract-call";
 
 export const TopComment = (props: {
   key: string;
@@ -23,6 +27,9 @@ export const TopComment = (props: {
   if (!count) {
     getVoteCountByMessageId(messageId);
   }
+
+  const { callUpvote } = useContractConnectUpvote();
+  const { callDownvote } = useContractConnectDownvote();
 
   return (
     <Stack
@@ -60,13 +67,21 @@ export const TopComment = (props: {
           animation: "gradient 5s ease alternate-reverse infinite",
         }}
       >
-        <IconButton size="small" sx={{ bgcolor: "primary.main" }}>
+        <IconButton
+          size="small"
+          sx={{ bgcolor: "primary.main" }}
+          onClick={() => callUpvote(messageId)}
+        >
           <North fontSize="small" color="secondary" />
         </IconButton>
         <Typography variant="body1" color="secondary">
           {count}
         </Typography>
-        <IconButton size="small" sx={{ bgcolor: "primary.main" }}>
+        <IconButton
+          size="small"
+          sx={{ bgcolor: "primary.main" }}
+          onClick={() => callDownvote(messageId)}
+        >
           <South fontSize="small" color="secondary" />
         </IconButton>
       </Stack>
