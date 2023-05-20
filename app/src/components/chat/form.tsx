@@ -9,6 +9,7 @@ export const postMessage = async ({ message, special }: { message: string; speci
 	const response = await axios.post("api/message", { message, special });
 	return response.data;
 };
+
 export const Form = () => {
 	const { mutate: post } = useMutation(postMessage);
 	const formMethods = useForm<MessageContent>({ mode: "onChange" });
