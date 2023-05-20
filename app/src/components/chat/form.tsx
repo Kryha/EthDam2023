@@ -49,7 +49,7 @@ export const Form = () => {
 			}}
 		>
 			<Stack direction="row" justifyContent="space-between" sx={{ width: 1 }}>
-				<TextField {...register("message")} name="message" id="standard-basic" label="Write something" variant="standard" />
+				<TextField {...register("message")} color="secondary" name="message" id="standard-basic" label="Write something" variant="standard" />
 				<Button variant="contained" color="secondary" type="submit">
 					Send
 				</Button>
