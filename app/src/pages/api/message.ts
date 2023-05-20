@@ -62,7 +62,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req.method);
   switch (req.method) {
     case "GET":
       return GET(req, res);
