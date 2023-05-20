@@ -1,5 +1,5 @@
 import { ArrowForwardIosRounded } from "@mui/icons-material";
-import { Stack, Tab, Tabs as MUITabs, Typography, TabProps, TabsProps } from "@mui/material";
+import { Stack, Tab, Tabs as MUITabs, Typography, TabProps } from "@mui/material";
 import { useState } from "react";
 import { Comments, TopComments } from "./comments";
 import { useQuery } from "react-query";
@@ -20,7 +20,16 @@ function TabPanel(props: TabPanelProps) {
 	const { children, value, index, ...other } = props;
 
 	return (
-		<Stack component="div" sx={{ width: value === index ? 1 : 0, flexGrow: value === index ? 1 : 0, overflowY: "scroll", transition: "all 1s ease-in-out" }} role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
+		<Stack
+			direction="column-reverse"
+			component="div"
+			sx={{ width: value === index ? 1 : 0, flexGrow: value === index ? 1 : 0, overflowY: "scroll", transition: "all 1s ease-in-out" }}
+			role="tabpanel"
+			hidden={value !== index}
+			id={`simple-tabpanel-${index}`}
+			aria-labelledby={`simple-tab-${index}`}
+			{...other}
+		>
 			{value === index && children}
 		</Stack>
 	);
@@ -39,7 +48,7 @@ export const getComments = async (): Promise<ApiGetMessage> => {
 };
 
 export function BasicTabs() {
-	const { data } = useQuery(["comments"], getComments, {
+	const { data } = useQuery("comments", getComments, {
 		refetchInterval: 250,
 	});
 	const [value, setValue] = useState(0);
@@ -49,18 +58,16 @@ export function BasicTabs() {
 	};
 
 	return (
-		<Stack sx={{ flexGrow: 1, position: "relative", overflow: "scroll" }}>
+		<Stack sx={{ flexGrow: 1, position: "relative", overflow: "scroll", borderBottom: 1 }}>
 			<Stack
 				spacing={2}
 				direction="row"
 				sx={{
-					bottom: 1,
 					flexGrow: 1,
 					height: 1,
 					maxHeight: 55,
 					alignItems: "center",
 					borderBottom: 1,
-					borderColor: "divider",
 				}}
 			>
 				<ArrowForwardIosRounded color="secondary" />
@@ -72,11 +79,9 @@ export function BasicTabs() {
 					TabIndicatorProps={{
 						sx: {
 							display: "none",
-							// width: "50px !important",
 							borderRadius: 50,
 							bottom: 0,
 							my: "auto",
-							// inset: "0 0 0 0",
 						},
 					}}
 				>

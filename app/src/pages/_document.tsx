@@ -26,6 +26,7 @@ export default function Document() {
 						backgroundSize: "120px 120px",
 						transform: "rotateX(-350deg)",
 						zIndex: -1,
+						maxHeight: "calc(100vh + 20px)",
 					},
 				}}
 			>

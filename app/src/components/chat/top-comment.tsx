@@ -1,16 +1,28 @@
 import { North, South } from "@mui/icons-material";
-import { Avatar, IconButton, Paper, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  IconButton,
+  Paper,
+  Stack,
+  StackProps,
+  Typography,
+} from "@mui/material";
 import { getVoteCountByMessageId } from "@services/get-vote-count";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
+import {
+  useContractConnectDownvote,
+  useContractConnectUpvote,
+} from "../../services/contract-call";
 
-export const TopComment = (props: {
+interface Props extends StackProps {
   key: string;
   username: string;
   message: string;
   messageId: string;
   count?: number;
-}) => {
-  const { key, username, message, count: _count, messageId } = props;
+}
+export const TopComment = (props: Props) => {
+  const { key, username, message, count: _count, messageId, ...rest } = props;
 
   const [count, setCount] = useState(_count);
 
@@ -24,6 +36,9 @@ export const TopComment = (props: {
     getVoteCountByMessageId(messageId);
   }
 
+  const { callUpvote } = useContractConnectUpvote();
+  const { callDownvote } = useContractConnectDownvote();
+
   return (
     <Stack
       key={key}
@@ -32,6 +47,7 @@ export const TopComment = (props: {
         borderRadius: 2,
         width: 1,
         overflow: "hidden",
+        ...rest.sx,
       }}
     >
       <Stack direction="row" spacing={2} sx={{ p: 1 }}>
@@ -45,10 +61,9 @@ export const TopComment = (props: {
           </Typography>
         </Stack>
       </Stack>
-
       <Stack
         direction="row"
-        justifyContent="flex-end"
+        justifyContent="space-between"
         spacing={1}
         px={1}
         sx={{
@@ -60,15 +75,25 @@ export const TopComment = (props: {
           animation: "gradient 5s ease alternate-reverse infinite",
         }}
       >
-        <IconButton size="small" sx={{ bgcolor: "primary.main" }}>
-          <North fontSize="small" color="secondary" />
-        </IconButton>
-        <Typography variant="body1" color="secondary">
+        <Typography variant="h6" color="primary">
           {count}
         </Typography>
-        <IconButton size="small" sx={{ bgcolor: "primary.main" }}>
-          <South fontSize="small" color="secondary" />
-        </IconButton>
+        <Stack direction="row" spacing={2}>
+          <IconButton
+            size="small"
+            sx={{ bgcolor: "primary.main" }}
+            onClick={() => callUpvote(messageId, 1)}
+          >
+            <North fontSize="small" color="secondary" />
+          </IconButton>
+          <IconButton
+            size="small"
+            sx={{ bgcolor: "primary.main" }}
+            onClick={() => callDownvote(messageId, 1)}
+          >
+            <South fontSize="small" color="secondary" />
+          </IconButton>
+        </Stack>
       </Stack>
     </Stack>
   );

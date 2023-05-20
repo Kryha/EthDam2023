@@ -1,10 +1,7 @@
-import { Button, Slider, Stack, TextField } from "@mui/material";
-import {
-  useContractConnectPost,
-  useContractConnectUpvote,
-} from "@services/contract-call";
+import { Button, Slider, Stack, TextField, Typography } from "@mui/material";
+import { useContractConnectUpvote } from "@services/contract-call";
 import axios from "axios";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
@@ -24,9 +21,9 @@ export const postMessage = async ({
 export const Form = () => {
   const { data: messageId, mutate: post } = useMutation(postMessage);
   const formMethods = useForm<MessageContent>({ mode: "onChange" });
-  const { register, handleSubmit } = formMethods;
+  const { register, handleSubmit, watch } = formMethods;
+  const [slider, setSlider] = useState<number | number[]>(0);
 
-  const { callPostMessage } = useContractConnectPost();
   const { callUpvote } = useContractConnectUpvote();
 
   const onSubmit = async ({ message, amount }: MessageContent) => {
@@ -34,12 +31,10 @@ export const Form = () => {
   };
 
   useMemo(async () => {
-    if (messageId) {
-      console.log(messageId);
-      await callPostMessage("", messageId);
-      await callUpvote(messageId);
+    if (messageId && !Array.isArray(slider) && slider > 0) {
+      await callUpvote(messageId, slider);
     }
-  }, [messageId]);
+  }, [messageId, slider]);
 
   return (
     <Stack
@@ -52,33 +47,42 @@ export const Form = () => {
         justifyContent: "center",
         alignItems: "center",
         px: 2,
-        pt: 1,
-        pb: 2,
+        py: 1,
+        borderTop: 1,
       }}
     >
       <Stack direction="row" justifyContent="space-between" sx={{ width: 1 }}>
         <TextField
           {...register("message")}
+          color="secondary"
           name="message"
           id="standard-basic"
           label="Write something"
           variant="standard"
+          InputProps={{ sx: { color: "#e0e0e1" } }}
         />
         <Button variant="contained" color="secondary" type="submit">
           Send
         </Button>
       </Stack>
-      <Slider
-        {...register("amount")}
-        color="secondary"
-        name="amount"
-        defaultValue={1}
-        step={1}
-        marks
-        min={0}
-        valueLabelDisplay="auto"
-        max={10}
-      />
+      <Stack direction="row" sx={{ width: 1 }} spacing={4}>
+        <Slider
+          {...register("amount")}
+          value={slider}
+          onChange={(_, value) => setSlider(value)}
+          color="secondary"
+          name="amount"
+          defaultValue={1}
+          step={1}
+          marks
+          min={0}
+          valueLabelDisplay="auto"
+          max={10}
+        />
+        <Typography variant="h5" color="secondary">
+          {slider}
+        </Typography>
+      </Stack>
     </Stack>
   );
 };
