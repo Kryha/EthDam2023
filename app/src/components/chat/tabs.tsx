@@ -2,6 +2,8 @@ import { ArrowForwardIosRounded } from "@mui/icons-material";
 import { Stack, Tab, Tabs as MUITabs, Typography, TabProps, TabsProps } from "@mui/material";
 import { useState } from "react";
 import { Comments, TopComments } from "./comments";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 export const Tabs = () => {
 	return <BasicTabs />;
@@ -30,7 +32,14 @@ function a11yProps(index: number) {
 	};
 }
 
+export const getComments = async (): Promise<boolean> => {
+	const response = await axios.get("route");
+	return response.data;
+};
+
 export function BasicTabs() {
+	const {} = useQuery(["comments", getComments]);
+
 	const [value, setValue] = useState(0);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
