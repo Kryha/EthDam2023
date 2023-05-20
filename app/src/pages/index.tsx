@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Chat } from "@/components";
 import { Wallet } from "@/features/wallet/wallet";
 import { Reactions, TopComment } from "@features/top-comment";
+import { Explosions } from "@features/top-comment/explosion";
 
 export default function Home() {
 	return (
@@ -45,6 +46,7 @@ export default function Home() {
 								}}
 							>
 								<TopComment />
+								<Explosions />
 								<Image
 									src={screen}
 									layout="responsive"
