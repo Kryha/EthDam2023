@@ -17,12 +17,8 @@ function TabPanel(props: TabPanelProps) {
 	const { children, value, index, ...other } = props;
 
 	return (
-		<Stack sx={{ border: 1, flexGrow: 1, overflowY: "scroll" }} role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
+		<Stack component="div" sx={{ flexGrow: 1, overflowY: "scroll" }} role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
+			{value === index && children}
 		</Stack>
 	);
 }
@@ -42,9 +38,8 @@ export function BasicTabs() {
 	};
 
 	return (
-		<Stack sx={{ border: 1, flexGrow: 1, position: "relative", overflow: "scroll" }}>
+		<Stack sx={{ flexGrow: 1, position: "relative", overflow: "scroll" }}>
 			<Stack
-				component={Paper}
 				spacing={2}
 				direction="row"
 				sx={{
@@ -58,9 +53,9 @@ export function BasicTabs() {
 				}}
 			>
 				<ArrowBackIosNewRounded />
-				<MUITabs value={value} onChange={handleChange} aria-label="basic tabs example">
-					<Tab label="Top" {...a11yProps(0)} />
-					<Tab label="All" {...a11yProps(1)} />
+				<MUITabs value={value} onChange={handleChange} aria-label="basic tabs example" TabIndicatorProps={{ sx: { display: "none" } }}>
+					<Tab label="Top" {...a11yProps(0)} sx={{ borderRadius: 50 }} />
+					<Tab label="All" {...a11yProps(1)} sx={{ borderRadius: 50 }} />
 				</MUITabs>
 			</Stack>
 			<TabPanel value={value} index={0}>
