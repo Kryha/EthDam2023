@@ -93,15 +93,15 @@ export const useContractGetMessageById = () => {
         signer
       );
       const transaction = await contract.getMessageById(messageId);
-      console.log("transaction", transaction);
-      //const transactionReceipt = await transaction.wait();
-      // if (transactionReceipt.status !== 1) {
-      //     alert('error message');
-      //     return;
-      // }
-      return contract;
+      return transaction;
     }
   };
 
-  return { callGetMessageById };
+  const getVoteCountByMessageId = async (messageId: string) => {
+    const tr = await callGetMessageById(messageId);
+    const votes = Number(tr[1]);
+    return votes;
+  };
+
+  return { callGetMessageById, getVoteCountByMessageId };
 };

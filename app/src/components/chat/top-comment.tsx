@@ -8,11 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import { getVoteCountByMessageId } from "@services/get-vote-count";
-import React, { useMemo, useState } from "react";
-import {
-  useContractConnectDownvote,
-  useContractConnectUpvote,
-} from "../../services/contract-call";
+import { useContractConnectDownvote, useContractConnectUpvote, useContractGetMessageById } from "../../services/contract-call";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 
 interface Props extends StackProps {
   key: string;
@@ -25,6 +22,8 @@ export const TopComment = (props: Props) => {
   const { key, username, message, count: _count, messageId, ...rest } = props;
 
   const [count, setCount] = useState(_count);
+
+  const { getVoteCountByMessageId } = useContractGetMessageById();
 
   useMemo(async () => {
     if (_count === undefined) {
