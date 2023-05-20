@@ -54,8 +54,8 @@ export function BasicTabs() {
 			>
 				<ArrowBackIosNewRounded />
 				<MUITabs value={value} onChange={handleChange} aria-label="basic tabs example" TabIndicatorProps={{ sx: { display: "none" } }}>
-					<Tab label="Top" {...a11yProps(0)} sx={{ borderRadius: 50 }} />
-					<Tab label="All" {...a11yProps(1)} sx={{ borderRadius: 50 }} />
+					<Tab label={<Typography variant="button">Top</Typography>} {...a11yProps(0)} sx={{ borderRadius: 50 }} />
+					<Tab label={<Typography variant="button">All</Typography>} {...a11yProps(1)} sx={{ borderRadius: 50 }} />
 				</MUITabs>
 			</Stack>
 			<TabPanel value={value} index={0}>

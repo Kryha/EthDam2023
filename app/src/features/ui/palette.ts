@@ -8,10 +8,11 @@ export const palette = (theme: Theme): Palette => {
 			white: "#e0e0e1",
 			black: "#151515",
 		},
-		primary: { light: "#434343", main: "#151515", dark: "#0e0e0e", contrastText: "#e2e2e2" },
+		primary: { light: "#434343", main: "#151515", dark: "#0e0e0e", contrastText: "#B8E868" },
+		secondary: { light: "#B8E868", main: "#B8E868", dark: "#B8E868", contrastText: "#1B1B1B" },
 		text: {
 			primary: "#494a52",
-			secondary: "#f1f1f2",
+			secondary: "#B8E868",
 			disabled: "#9799a6",
 		},
 		background: {
