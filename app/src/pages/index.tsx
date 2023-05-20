@@ -1,9 +1,9 @@
 import { Box, Button, Chip, IconButton, Paper, Slider, Stack, TextField, Tooltip } from "@mui/material";
 import Head from "next/head";
-import { Chat } from "@components";
 import { Delete } from "@mui/icons-material";
 import screen from "../../public/screen.gif";
 import Image from "next/image";
+import { Chat } from "@/components";
 
 export default function Home() {
 	return (
@@ -15,10 +15,10 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Stack component="main" sx={{ maxHeight: "100vh" }}>
-				<Stack justifyContent="center" alignItems="center" sx={{ border: 1, height: 80 }}>
+				<Stack justifyContent="center" alignItems="center" sx={{ height: 80 }}>
 					<TextField id="outlined-basic" label="Search" variant="outlined" sx={{ width: 1, maxWidth: 400 }} />
 				</Stack>
-				<Stack component="section" role="livestream" direction="row" sx={{ border: 1, maxHeight: "calc(100vh - 80px)", justifyContent: "center" }}>
+				<Stack component="section" role="livestream" direction="row" sx={{ maxHeight: "calc(100vh - 80px)", justifyContent: "center" }}>
 					<Stack justifyContent="center" alignItems="center" sx={{ flexGrow: 1 }}>
 						<Stack
 							component={Paper}
@@ -35,7 +35,9 @@ export default function Home() {
 							<Image
 								src={screen}
 								layout="responsive"
+								// @ts-ignore
 								width="100%"
+								// @ts-ignore
 								height="62.5%" // 16:10 aspect ratio
 								objectFit="cover"
 							/>
