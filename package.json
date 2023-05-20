@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build --workspaces --if-present"
+    "build": "npm run build --workspaces --if-present",
+    "start-ssb": "npx ssb-server start"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,8 @@
   "devDependencies": {
     "cpy-cli": "4.2.0",
     "del-cli": "5.0.0"
+  },
+  "dependencies": {
+    "ssb-server": "^15.3.0"
   }
 }
