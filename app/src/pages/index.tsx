@@ -21,7 +21,7 @@ export default function Home() {
 					<TextField id="outlined-basic" label="Search" variant="outlined" sx={{ width: 1, maxWidth: 400 }} />
 					<Wallet />
 				</Stack>
-				<Stack spacing={1} m={1} component="section" role="livestream" direction="row" sx={{ maxHeight: "calc(100vh - 80px)", justifyContent: "center" }}>
+				<Stack spacing={1} m={1} component="section" role="livestream" direction="row" sx={{ maxHeight: "calc(100vh - 80px)", justifyContent: "center", flexGrow: 1 }}>
 					<Stack justifyContent="center" alignItems="center" sx={{ flexGrow: 1 }}>
 						<Stack
 							component={Paper}
