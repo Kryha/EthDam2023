@@ -1,18 +1,14 @@
-## running
-```
-docker compose up
-```
-
 # Architecture
 ```mermaid
 flowchart TB
     bc[(Blockchain)]
-    bc <-.-> gozzip1
-    bc <-.-> gozzip2
-    bc <-.-> gozzip3
-    gozzip1 <--> gozzip3
-    gozzip1 <--> gozzip2
-    gozzip2 <--> gozzip3
+    bc <-.-> client1
+    bc <-.-> client2
+    bc <-.-> client3
+    bc <-.-> client4
+    client1 & client2 & client3 <--> client4
+    client1 & client2 <--> client3
+    client1 <--> client2
 ```
 
 # voting
