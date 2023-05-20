@@ -1,9 +1,8 @@
-import { Delete } from "@mui/icons-material";
 import { Box, Button, Chip, IconButton, Slider, Stack, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material";
 import Head from "next/head";
 import { useState } from "react";
-import { Comic_Neue } from "next/font/google";
-const font = Comic_Neue({ weight: ["300", "400", "700"], style: ["italic", "normal"], subsets: ["latin"] });
+import { Chat } from "@components";
+import { Delete } from "@mui/icons-material";
 
 export default function Home() {
 	return (
@@ -15,15 +14,12 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Stack component="main">
-				<Stack sx={{ border: 1, height: 80 }}>
-					<TextField id="outlined-basic" label="Outlined" variant="outlined" />
+				<Stack justifyContent="center" alignItems="center" sx={{ border: 1, height: 80 }}>
+					<TextField id="outlined-basic" label="Search" variant="outlined" sx={{ width: 1, maxWidth: 400 }} />
 				</Stack>
 				<Stack component="section" role="livestream" direction="row" sx={{ border: 1, flexGrow: 1 }}>
-					<Stack component="section" role="screen" sx={{ border: 1, flexGrow: 1 }}></Stack>
-					<Stack component="section" role="chat" sx={{ border: 1, width: 450 }}>
-						<Button variant="contained" sx={{ fontFamily: font.style.fontFamily }}>
-							contained
-						</Button>
+					<Stack component="section" role="screen" sx={{ border: 1, flexGrow: 1 }}>
+						<Button variant="contained">contained</Button>
 						<Button variant="outlined">outlined</Button>
 						<Button variant="text">text</Button>
 						<TextField id="outlined-basic" label="Outlined" variant="outlined" />
@@ -31,7 +27,7 @@ export default function Home() {
 						<TextField id="standard-basic" label="Standard" variant="standard" />
 						<Chip label="Chip Filled" />
 						<Chip label="Chip Outlined" variant="outlined" />
-						<Slider />
+						<Slider defaultValue={1} step={1} marks min={0} valueLabelDisplay="auto" max={10} />
 						<Tooltip title="Delete">
 							<IconButton>
 								<Delete />
@@ -39,6 +35,7 @@ export default function Home() {
 						</Tooltip>
 						<BasicTabs />
 					</Stack>
+					<Chat />
 				</Stack>
 			</Stack>
 		</>

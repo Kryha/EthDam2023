@@ -14,7 +14,8 @@ export default function Document() {
 					// backgroundImage: "linear-gradient(270deg,#3CC00D,#ACD71B)",
 					// background: "linear-gradient(45deg,#a2da89,#6bb94e)",
 					perspective: "170px",
-					// overflow: "hidden",
+					zIndex: 0,
+					// overflow: "hidden",.
 					"&::before": {
 						content: "''",
 						position: "absolute",
@@ -24,6 +25,7 @@ export default function Document() {
 						backgroundImage: "linear-gradient(#a9ea5080 1px, transparent 1px), linear-gradient(to right, #a9ea5080 1px, transparent 1px)",
 						backgroundSize: "120px 120px",
 						transform: "rotateX(-350deg)",
+						zIndex: -1,
 					},
 				}}
 			>
