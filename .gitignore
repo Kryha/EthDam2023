@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+node_modules
+=======
 *node_modules*
 *dist/
 sbot-data/*
+>>>>>>> 533265caa3d91b4626c67f7a3444b8802f19c584
