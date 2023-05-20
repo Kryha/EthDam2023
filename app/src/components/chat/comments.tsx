@@ -7,6 +7,7 @@ export const getMemes = async (): Promise<boolean> => {
 	const response = await axios.get("route");
 	return response.data;
 };
+
 export const Comments = () => {
 	const {} = useQuery(["avatars", getMemes]);
 	const data = Array.from({ length: 25 }, () => "comment");

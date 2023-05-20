@@ -1,6 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
-import chihuahua from "../../../public/chi.gif";
-import Image from "next/image";
+import { Box, Button, Fade, Stack, Tooltip, Typography, Zoom } from "@mui/material";
 
 export const Reactions = () => {
 	const data = Array.from({ length: 4 }, () => "comment");
@@ -15,11 +13,39 @@ export const Reactions = () => {
 
 export const Reaction = () => {
 	return (
-		<Button variant="contained" color="secondary" sx={{ p: 0.5, borderRadius: 50 }}>
-			<Stack direction="row" spacing={2} alignItems="center" pr={1}>
-				<Box sx={{ minWidth: 64, minHeight: 64, backgroundImage: "url('/chi.gif')", backgroundRepeat: "no-repeat", borderRadius: 50, backgroundSize: "cover" }} />
-				<Typography variant="h5">12</Typography>
-			</Stack>
-		</Button>
+		<Tooltip
+			TransitionComponent={Zoom}
+			TransitionProps={{ easing: { enter: "cubic-bezier(.02,1.79,.31,.89)", exit: "cubic-bezier(.2,1.79,.28,.77)" }, timeout: { enter: 600, exit: 300 } }}
+			placement="top"
+			sx={{ background: "transparent" }}
+			title={
+				<Box
+					sx={{
+						transform: "translateX(-60%)",
+						minWidth: "30rem",
+						minHeight: "30rem",
+						backgroundImage: "url('/chi.gif')",
+						backgroundRepeat: "no-repeat",
+						borderRadius: 50,
+						backgroundSize: "cover",
+					}}
+				/>
+			}
+		>
+			<Button
+				variant="contained"
+				color="secondary"
+				// onClick={onClick}
+				sx={{
+					p: 0.5,
+					borderRadius: 50,
+				}}
+			>
+				<Stack direction="row" spacing={2} alignItems="center" pr={1}>
+					<Box sx={{ minWidth: 64, minHeight: 64, backgroundImage: "url('/chi.gif')", backgroundRepeat: "no-repeat", borderRadius: 50, backgroundSize: "cover" }} />
+					<Typography variant="h5">12</Typography>
+				</Stack>
+			</Button>
+		</Tooltip>
 	);
 };
