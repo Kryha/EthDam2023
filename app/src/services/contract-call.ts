@@ -1,5 +1,4 @@
 import { ethers } from "ethers";
-import { useCallback } from "react";
 import MessageVoting from "../abi/MessageVoting.json";
 import { useStore } from "@/store";
 
@@ -15,12 +14,7 @@ export const useContractConnectPost = () => {
         MessageVoting.abi,
         signer
       );
-      const transaction = await contract.postMessage(messageContent, messageId);
-      const transactionReceipt = await transaction.wait();
-      if (transactionReceipt.status !== 1) {
-        console.error(transactionReceipt);
-        return;
-      }
+      await contract.postMessage(messageContent, messageId);
       return contract;
     }
   };
@@ -40,12 +34,7 @@ export const useContractConnectUpvote = () => {
         MessageVoting.abi,
         signer
       );
-      const transaction = await contract.upvote(messageId);
-      const transactionReceipt = await transaction.wait();
-      if (transactionReceipt.status !== 1) {
-        console.error(transactionReceipt);
-        return;
-      }
+      await contract.upvote(messageId);
       return contract;
     }
   };
@@ -65,12 +54,7 @@ export const useContractConnectDownvote = () => {
         MessageVoting.abi,
         signer
       );
-      const transaction = await contract.downvote(messageId);
-      const transactionReceipt = await transaction.wait();
-      if (transactionReceipt.status !== 1) {
-        console.error(transactionReceipt);
-        return;
-      }
+      await contract.downvote(messageId);
       return contract;
     }
   };
@@ -90,13 +74,7 @@ export const useContractGetMessageById = () => {
         MessageVoting.abi,
         signer
       );
-      const transaction = await contract.getMessageById(messageId);
-      console.log("transaction", transaction);
-      //const transactionReceipt = await transaction.wait();
-      // if (transactionReceipt.status !== 1) {
-      //     console.error(transactionReceipt)
-      //     return;
-      // }
+      await contract.getMessageById(messageId);
       return contract;
     }
   };
