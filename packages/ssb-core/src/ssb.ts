@@ -1,6 +1,8 @@
 import pull from "pull-stream";
 import { z } from "zod";
 import { SBConnection } from "@blockbusters/ssb-types";
+// @ts-ignore
+import ssbClient from "ssb-client";
 
 const MESSAGE_TYPE = "message";
 const ALLOWED_MESSAGE_TYPES = [MESSAGE_TYPE] as const;
@@ -39,9 +41,11 @@ type Message = {
   type: string;
 };
 
-let connection: SBConnection;
-export function setConnection(con: SBConnection) {
-  connection = con;
+const connection = connect()
+
+async function connect(): SBConnection {
+  const sbot = await ssbClient();
+  return sbot;
 }
 
 export async function postMessage(message: MessageContent) {
