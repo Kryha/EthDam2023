@@ -17,6 +17,7 @@ services:
     volumes:
       - ./deployment/external-services/go-ssb/secret-1:/root/.ssb-go/secret
       - ./deployment/external-services/go-ssb/config.toml:/root/.ssb-go/config.toml
+      - ./deployment/external-services/go-ssb/scripts/:/SCRIPTZ/
       - ./deployment/dynamic-volumes/go-ssb-1:/root/.ssb-go
   go-ssb-2:
     build: ./deployment/external-services/go-ssb
@@ -29,6 +30,7 @@ services:
       - ./deployment/external-services/go-ssb/secret-2:/root/.ssb-go/secret
       - ./deployment/external-services/go-ssb/config.toml:/root/.ssb-go/config.toml
       - ./deployment/dynamic-volumes/go-ssb-2:/root/.ssb-go
+      - ./deployment/external-services/go-ssb/scripts/:/SCRIPTZ/
         #  go-ssb-custom:
         #    build: ./deployment/external-services/go-ssb
         #    environment:
