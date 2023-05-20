@@ -4,9 +4,9 @@ import { Comment } from "./comment";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Message } from "@blockbusters/ssb-types";
-import { getVoteCountByMessageId } from "@services/get-vote-count";
 import { useContractGetMessageById } from "@/services";
 import { useMemo, useState } from "react";
+import { useCommentsStore } from "@store/comments";
 
 export const getMemes = async (): Promise<boolean> => {
 	const response = await axios.get("route");
@@ -36,11 +36,12 @@ export const Comments = (props: { messages: Message[] }) => {
 	);
 };
 
-type ExtendedMessage = Message & { count: number };
+export type ExtendedMessage = Message & { count: number };
 
 export const TopComments = (props: { messages: Message[] }) => {
 	const { messages } = props;
 	const { getVoteCountByMessageId } = useContractGetMessageById();
+	const { setTop } = useCommentsStore((state) => state);
 	const [sortedMessages, setSortedMessages] = useState<ExtendedMessage[]>([]);
 
 	useMemo(async () => {
@@ -57,6 +58,7 @@ export const TopComments = (props: { messages: Message[] }) => {
 		});
 
 		setSortedMessages(sortedMessages);
+		setTop(sortedMessages[0]);
 	}, [messages]);
 
 	return (
@@ -64,6 +66,7 @@ export const TopComments = (props: { messages: Message[] }) => {
 			{sortedMessages.reduceRight<JSX.Element[]>((array, msg, index) => {
 				const el = <TopComment key={index.toString()} username={msg.content.username} message={msg.content.message} messageId={msg.id} count={msg.count} sx={{ order: msg.count }} />;
 				array.push(el);
+
 				return array;
 			}, [])}
 		</Stack>
