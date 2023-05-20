@@ -83,3 +83,15 @@ a {
 		background-position: 0% 50%;
 	}
 }
+
+@keyframes move {
+	0% {
+		background-position-y: 200%;
+	}
+	50% {
+		background-position-y: 100%;
+	}
+	100% {
+		background-position-y: 0%;
+	}
+}
