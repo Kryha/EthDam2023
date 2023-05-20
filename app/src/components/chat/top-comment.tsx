@@ -1,13 +1,28 @@
 import { North, South } from "@mui/icons-material";
 import { Avatar, IconButton, Paper, Stack, Typography } from "@mui/material";
-import React from "react";
+import { getVoteCountByMessageId } from "@services/get-vote-count";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 
 export const TopComment = (props: {
   key: string;
   username: string;
   message: string;
+  messageId: string;
+  count?: number;
 }) => {
-  const { key, username, message } = props;
+  const { key, username, message, count: _count, messageId } = props;
+
+  const [count, setCount] = useState(_count);
+
+  useMemo(async () => {
+    if (_count === undefined) {
+      setCount(await getVoteCountByMessageId(messageId));
+    }
+  }, [messageId, _count]);
+
+  if (!count) {
+    getVoteCountByMessageId(messageId);
+  }
 
   return (
     <Stack
@@ -48,6 +63,9 @@ export const TopComment = (props: {
         <IconButton size="small" sx={{ bgcolor: "primary.main" }}>
           <North fontSize="small" color="secondary" />
         </IconButton>
+        <Typography variant="body1" color="secondary">
+          {count}
+        </Typography>
         <IconButton size="small" sx={{ bgcolor: "primary.main" }}>
           <South fontSize="small" color="secondary" />
         </IconButton>
