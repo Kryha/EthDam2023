@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@blockbusters/util-animal-names": "^1.0.0",
+    "@blockbusters/ssb-types": "^1.0.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
