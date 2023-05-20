@@ -5,25 +5,28 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build --workspaces --if-present"
+    "build": "npm run build --workspaces --if-present",
+    "start-ssb": "npx ssb-server start"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kryha/EthDam2023.git"
+    "url": "git+https://github.com/FilipHarald/ethdam-priv.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Kryha/EthDam2023/issues"
+    "url": "https://github.com/FilipHarald/ethdam-priv/issues"
   },
-  "homepage": "https://github.com/Kryha/EthDam2023#readme",
+  "homepage": "https://github.com/FilipHarald/ethdam-priv#readme",
   "workspaces": [
-    "packages/ssb",
-    "packages/util-animal-names",
-    "test"
+    "packages/*",
+    "be-test",
+    "fe-test",
+    "app"
   ],
   "devDependencies": {
     "cpy-cli": "4.2.0",
-    "del-cli": "5.0.0"
+    "del-cli": "5.0.0",
+    "ssb-server": "^15.3.0"
   }
 }
