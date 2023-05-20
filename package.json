@@ -9,18 +9,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kryha/EthDam2023.git"
+    "url": "git+https://github.com/FilipHarald/ethdam-priv.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Kryha/EthDam2023/issues"
+    "url": "https://github.com/FilipHarald/ethdam-priv/issues"
   },
-  "homepage": "https://github.com/Kryha/EthDam2023#readme",
+  "homepage": "https://github.com/FilipHarald/ethdam-priv#readme",
   "workspaces": [
-    "packages/ssb",
-    "packages/util-animal-names",
-    "test"
+    "packages/*",
+    "be-test",
+    "fe-test",
+    "app"
   ],
   "devDependencies": {
     "cpy-cli": "4.2.0",

@@ -1,0 +1,22 @@
+{
+  "name": "@blockbusters/ssb-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "author": "BlockBusters",
+  "license": "MIT",
+  "dependencies": {
+    "@blockbusters/ssb-types": "^1.0.0",
+    "pull-stream": "^3.7.0",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.1.4",
+    "@types/pull-stream": "^3.6.2",
+    "typescript": "^5.0.4"
+  }
+}

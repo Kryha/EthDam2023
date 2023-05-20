@@ -1,0 +1,17 @@
+{
+  "name": "@blockbusters/ssb-types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "author": "BlockBusters",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.1.4",
+    "typescript": "^5.0.4"
+  }
+}

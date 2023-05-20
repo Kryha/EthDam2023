@@ -3,79 +3,20 @@ import {
   Button,
   Chip,
   IconButton,
+  Paper,
   Slider,
   Stack,
-  Tab,
-  Tabs,
   TextField,
   Tooltip,
-  Typography,
 } from "@mui/material";
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import { Chat } from "@components";
 import { Delete } from "@mui/icons-material";
-import { Sign } from "crypto";
-import { signMessage } from "@services";
-
-interface Client {
-  isConnected: boolean;
-  address?: string;
-}
+import screen from "../../public/screen.gif";
+import Image from "next/image";
+import { Chat } from "@/components";
+import { Wallet } from "@/features/wallet/wallet";
 
 export default function Home() {
-  const [haveMetamask, sethaveMetamask] = useState(true);
-
-  const [client, setclient] = useState<Client>({
-    isConnected: false,
-  });
-
-  const checkConnection = async () => {
-    const { ethereum } = window;
-    if (ethereum) {
-      sethaveMetamask(true);
-      const accounts = await ethereum.request({ method: "eth_accounts" });
-      if (accounts.length > 0) {
-        setclient({
-          isConnected: true,
-          address: accounts[0],
-        });
-      } else {
-        setclient({
-          isConnected: false,
-        });
-      }
-    } else {
-      sethaveMetamask(false);
-    }
-  };
-
-  const connectWeb3 = async () => {
-    try {
-      const { ethereum } = window;
-
-      if (!ethereum) {
-        console.log("Metamask not detected");
-        return;
-      }
-
-      const accounts = await ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      setclient({
-        isConnected: true,
-        address: accounts[0],
-      });
-    } catch (error) {
-      console.log("Error connecting to metamask", error);
-    }
-  };
-
-  useEffect(() => {
-    checkConnection();
-  }, []);
-
   return (
     <>
       <Head>
@@ -84,11 +25,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Stack component="main">
+      <Stack component="main" sx={{ maxHeight: "100vh" }}>
         <Stack
+          direction="row"
           justifyContent="center"
           alignItems="center"
-          sx={{ border: 1, height: 80 }}
+          sx={{ height: 80 }}
         >
           <TextField
             id="outlined-basic"
@@ -96,122 +38,46 @@ export default function Home() {
             variant="outlined"
             sx={{ width: 1, maxWidth: 400 }}
           />
+          <Wallet />
         </Stack>
         <Stack
           component="section"
           role="livestream"
           direction="row"
-          sx={{ border: 1, flexGrow: 1 }}
+          sx={{ maxHeight: "calc(100vh - 80px)", justifyContent: "center" }}
         >
           <Stack
-            component="section"
-            role="screen"
-            sx={{ border: 1, flexGrow: 1 }}
+            justifyContent="center"
+            alignItems="center"
+            sx={{ flexGrow: 1 }}
           >
-            <Button variant="contained">contained</Button>
-            <Button variant="outlined" onClick={signMessage}>
-              Sign Message
-            </Button>
-            <Button variant="text" onClick={() => connectWeb3()}>
-              connect
-            </Button>
-            <TextField
-              id="outlined-basic"
-              label="Outlined"
-              variant="outlined"
-            />
-            <TextField id="filled-basic" label="Filled" variant="filled" />
-            <TextField
-              id="standard-basic"
-              label="Standard"
-              variant="standard"
-            />
-            <Chip label="Chip Filled" />
-            <Chip label="Chip Outlined" variant="outlined" />
-            <Slider
-              defaultValue={1}
-              step={1}
-              marks
-              min={0}
-              valueLabelDisplay="auto"
-              max={10}
-            />
-            <Tooltip title="Delete">
-              <IconButton>
-                <Delete />
-              </IconButton>
-            </Tooltip>
-            <BasicTabs />
+            <Stack
+              component={Paper}
+              role="screen"
+              sx={{
+                position: "relative",
+                width: 1,
+                aspectRatio: 3 / 2,
+                objectFit: "cover",
+                overflow: "hidden",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                src={screen}
+                layout="responsive"
+                // @ts-ignore
+                width="100%"
+                // @ts-ignore
+                height="62.5%" // 16:10 aspect ratio
+                objectFit="cover"
+              />
+            </Stack>
           </Stack>
+
           <Chat />
         </Stack>
       </Stack>
     </>
-  );
-}
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
-export function BasicTabs() {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-    </Box>
   );
 }
