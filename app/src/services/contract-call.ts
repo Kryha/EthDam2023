@@ -1,5 +1,4 @@
 import { ethers } from "ethers";
-import { useCallback } from "react";
 import MessageVoting from "../abi/MessageVoting.json";
 import { useStore } from "@/store";
 
@@ -15,12 +14,7 @@ export const useContractConnectPost = () => {
         MessageVoting.abi,
         signer
       );
-      const transaction = await contract.postMessage(messageContent, messageId);
-      const transactionReceipt = await transaction.wait();
-      if (transactionReceipt.status !== 1) {
-          alert('error message');
-          return;
-      }
+      await contract.postMessage(messageContent, messageId);
       return contract;
     }
   };
@@ -40,19 +34,13 @@ export const useContractConnectUpvote = () => {
         MessageVoting.abi,
         signer
       );
-      const transaction = await contract.upvote(messageId);
-      const transactionReceipt = await transaction.wait();
-      if (transactionReceipt.status !== 1) {
-          alert('error message');
-          return;
-      }
+      await contract.upvote(messageId);
       return contract;
     }
   };
 
   return { callUpvote };
 };
-
 
 export const useContractConnectDownvote = () => {
   const client = useStore((state) => state.client);
@@ -66,19 +54,13 @@ export const useContractConnectDownvote = () => {
         MessageVoting.abi,
         signer
       );
-      const transaction = await contract.downvote(messageId);
-      const transactionReceipt = await transaction.wait();
-      if (transactionReceipt.status !== 1) {
-          alert('error message');
-          return;
-      }
+      await contract.downvote(messageId);
       return contract;
     }
   };
 
   return { callDownvote };
 };
-
 
 export const useContractGetMessageById = () => {
   const client = useStore((state) => state.client);
@@ -92,13 +74,7 @@ export const useContractGetMessageById = () => {
         MessageVoting.abi,
         signer
       );
-      const transaction = await contract.getMessageById(messageId);
-      console.log("transaction", transaction)
-      //const transactionReceipt = await transaction.wait();
-      // if (transactionReceipt.status !== 1) {
-      //     alert('error message');
-      //     return;
-      // }
+      await contract.getMessageById(messageId);
       return contract;
     }
   };
