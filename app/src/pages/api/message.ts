@@ -4,12 +4,12 @@ import * as ssb from "@blockbusters/ssb-core";
 import { Message } from "@blockbusters/ssb-types";
 import { stringToAnimalName } from "@blockbusters/util-animal-names";
 
-type GetData = {
+export type ApiGetMessage = {
   top: Message[];
   all: Message[];
 };
 
-type PostData = {
+export type ApiPostMessage = {
   messageId: string;
 };
 
@@ -33,13 +33,13 @@ const cb = (msg: Message) => {
 
 ssb.readMessages(cb, { limit });
 
-function GET(req: NextApiRequest, res: NextApiResponse<GetData>) {
+function GET(req: NextApiRequest, res: NextApiResponse<ApiGetMessage>) {
   res.status(200).json({ top: topMessages, all: allMessages });
 }
 
 async function POST(
   req: NextApiRequest,
-  res: NextApiResponse<PostData | void>
+  res: NextApiResponse<ApiPostMessage | void>
 ) {
   if (!req.body.message) {
     res.status(400).send();
