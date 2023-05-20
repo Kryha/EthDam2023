@@ -13,13 +13,14 @@ export const Reactions = () => {
 };
 
 export const Reaction = ({ url }: { url: string }) => {
-	const { setReaction, removeReaction } = useReactionStore((state) => state);
+	const { reaction, setReaction, removeReaction } = useReactionStore((state) => state);
 	const handler = () => {
-		setReaction(url);
-
-		setTimeout(() => {
-			removeReaction();
-		}, 3000);
+		if (!reaction) {
+			setReaction(url);
+			setTimeout(() => {
+				removeReaction();
+			}, 3000);
+		}
 	};
 	// const url = "/chi.gif";
 	return (
