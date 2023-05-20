@@ -1,6 +1,6 @@
 import pull from "pull-stream";
 import { z } from "zod";
-import { SBConnection } from "@blockbusters/ssb-types";
+import { SBConnection, MessageContent, Message } from "@blockbusters/ssb-types";
 
 const MESSAGE_TYPE = "message";
 const ALLOWED_MESSAGE_TYPES = [MESSAGE_TYPE] as const;
@@ -28,16 +28,6 @@ function isScuttleBotMessage(unknown: unknown): unknown is ScuttleBotMessage {
   const { success } = scuttleBotMessageSchema.safeParse(unknown);
   return success;
 }
-
-type MessageContent = { message: string; special?: boolean; username: string };
-type Message = {
-  id: string;
-  content: MessageContent;
-  author: string;
-  previousId: string | undefined | null;
-  timestamp: number;
-  type: string;
-};
 
 let connection: SBConnection;
 export function setConnection(con: SBConnection) {
@@ -82,8 +72,6 @@ async function _genericStream(
 ) {
   const sbot = await connection;
   const { live = true, reverse = false, limit = -1 } = args;
-
-  console.log(sbot)
 
   const logStream = sbot.createHistoryStream({ type, live, reverse, limit });
 
