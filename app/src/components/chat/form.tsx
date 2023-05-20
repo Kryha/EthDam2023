@@ -1,9 +1,16 @@
 import { Button, Slider, Stack, TextField } from "@mui/material";
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
 
 type MessageContent = { message: string; special?: boolean; username: string };
 
+export const postMessage = async ({ message, special }: { message: string; special: boolean }): Promise<boolean> => {
+	const response = await axios.post("api/message", { message, special });
+	return response.data;
+};
 export const Form = () => {
+	const { mutate: post } = useMutation(postMessage);
 	const formMethods = useForm<MessageContent>({ mode: "onChange" });
 	const { register, handleSubmit } = formMethods;
 
@@ -14,6 +21,7 @@ export const Form = () => {
 			username: "joe",
 		};
 		console.log({ send });
+		post({ message: message, special: false });
 	};
 
 	return (
