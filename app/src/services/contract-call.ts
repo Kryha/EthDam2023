@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import MessageVoting from "../abi/MessageVoting.json";
 import { useStore } from "@/store";
+import { CONTRACT_ADDRESS } from "@constants";
 
 export const useContractConnectPost = () => {
   const client = useStore((state) => state.client);
@@ -10,7 +11,7 @@ export const useContractConnectPost = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(
-        "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        CONTRACT_ADDRESS,
         MessageVoting.abi,
         signer
       );
@@ -30,7 +31,7 @@ export const useContractConnectUpvote = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(
-        "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        CONTRACT_ADDRESS,
         MessageVoting.abi,
         signer
       );
@@ -50,7 +51,7 @@ export const useContractConnectDownvote = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(
-        "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        CONTRACT_ADDRESS,
         MessageVoting.abi,
         signer
       );
@@ -70,7 +71,7 @@ export const useContractGetMessageById = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(
-        "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        CONTRACT_ADDRESS,
         MessageVoting.abi,
         signer
       );

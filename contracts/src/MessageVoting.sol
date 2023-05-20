@@ -9,7 +9,9 @@ contract MessageVoting {
 
     Message[] public messages;
 
-    function postMessage(string memory _content, string memory _messageId) public {
+    function postMessage(string memory _content, string memory _messageId)
+        public
+    {
         Message memory newMessage = Message({
             content: _content,
             votes: 0,
@@ -28,7 +30,11 @@ contract MessageVoting {
         messages[messageIndex].votes--;
     }
 
-    function getMessageById(string memory _messageId) public view returns (Message memory) {
+    function getMessageById(string memory _messageId)
+        public
+        view
+        returns (Message memory)
+    {
         uint256 messageIndex = _findMessageIndex(_messageId);
         return messages[messageIndex];
     }
@@ -53,10 +59,17 @@ contract MessageVoting {
         return sortedMessages;
     }
 
-    function _findMessageIndex(string memory _messageId) private view returns (uint256) {
+    function _findMessageIndex(string memory _messageId)
+        private
+        view
+        returns (uint256)
+    {
         bytes32 messageIdHash = keccak256(abi.encodePacked(_messageId));
         for (uint256 i = 0; i < messages.length; i++) {
-            if (keccak256(abi.encodePacked(messages[i].messageId)) == messageIdHash) {
+            if (
+                keccak256(abi.encodePacked(messages[i].messageId)) ==
+                messageIdHash
+            ) {
                 return i;
             }
         }
