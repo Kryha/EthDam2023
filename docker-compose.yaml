@@ -10,8 +10,8 @@ services:
   go-ssb-1:
     build: ./deployment/external-services/go-ssb
     environment:
-      SSB_MUXRPC_ADDRESS: ":8008"
-      SSB_ADDR: "localhost:8008"
+      SSB_MUXRPC_ADDRESS: "ethdam2023-go-ssb-1-1:8008"
+      SSB_ADDR: "ethdam2023-go-ssb-1-1:8008"
       SSB_WS_ADDRESS: ":8989"
       SSB_PROMETHEUS_ADDRESS: "localhost:6078"
     volumes:
@@ -22,8 +22,8 @@ services:
   go-ssb-2:
     build: ./deployment/external-services/go-ssb
     environment:
-      SSB_MUXRPC_ADDRESS: ":8009"
-      SSB_ADDR: "localhost:8009"
+      SSB_MUXRPC_ADDRESS: "ethdam2023-go-ssb-2-1:8009"
+      SSB_ADDR: "ethdam2023-go-ssb-2-1:8009"
       SSB_WS_ADDRESS: ":8990"
       SSB_PROMETHEUS_ADDRESS: "localhost:6079"
     volumes:
