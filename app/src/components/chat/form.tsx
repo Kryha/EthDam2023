@@ -59,6 +59,7 @@ export const Form = () => {
           id="standard-basic"
           label="Write something"
           variant="standard"
+          InputProps={{ sx: { color: "#e0e0e1" } }}
         />
         <Button variant="contained" color="secondary" type="submit">
           Send
