@@ -1,7 +1,7 @@
-import { Button, Slider, Stack, TextField } from "@mui/material";
+import { Button, Slider, Stack, TextField, Typography } from "@mui/material";
 import { useContractConnectPost, useContractConnectUpvote } from "@services/contract-call";
 import axios from "axios";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
@@ -15,7 +15,8 @@ export const postMessage = async ({ message, special }: { message: string; speci
 export const Form = () => {
 	const { data: messageId, mutate: post } = useMutation(postMessage);
 	const formMethods = useForm<MessageContent>({ mode: "onChange" });
-	const { register, handleSubmit } = formMethods;
+	const { register, handleSubmit, watch } = formMethods;
+	const [slider, setSlider] = useState<number | number[]>(0);
 
 	const { callPostMessage } = useContractConnectPost();
 	const { callUpvote } = useContractConnectUpvote();
@@ -43,6 +44,7 @@ export const Form = () => {
 				justifyContent: "center",
 				alignItems: "center",
 				px: 2,
+				py: 1,
 				borderTop: 1,
 			}}
 		>
@@ -52,7 +54,12 @@ export const Form = () => {
 					Send
 				</Button>
 			</Stack>
-			<Slider {...register("amount")} color="secondary" name="amount" defaultValue={1} step={1} marks min={0} valueLabelDisplay="auto" max={10} />
+			<Stack direction="row" sx={{ width: 1 }} spacing={4}>
+				<Slider {...register("amount")} value={slider} onChange={(_, value) => setSlider(value)} color="secondary" name="amount" defaultValue={1} step={1} marks min={0} valueLabelDisplay="auto" max={10} />
+				<Typography variant="h5" color="secondary">
+					{slider}
+				</Typography>
+			</Stack>
 		</Stack>
 	);
 };
