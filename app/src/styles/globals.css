@@ -87,11 +87,10 @@ a {
 @keyframes move {
 	0% {
 		background-position-y: 200%;
-	}
-	50% {
-		background-position-y: 100%;
+		background-position-x: 2%;
 	}
 	100% {
-		background-position-y: 0%;
+		background-position-y: 0;
+		background-position-x: -2%;
 	}
 }

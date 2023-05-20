@@ -2,17 +2,17 @@ import { Box, Button, Stack, Tooltip, Typography, Zoom } from "@mui/material";
 import { useReactionStore } from "@store/reaction";
 
 export const Reactions = () => {
-	const data = Array.from({ length: 4 }, () => "comment");
+	const data = ["/pepe.gif", "/chi.gif", "/chi.gif", "/chi.gif"];
 	return (
 		<Stack spacing={2} direction="row" sx={{ width: 1, p: 1, justifyContent: "flex-end" }}>
-			{data.map((_, index) => (
-				<Reaction key={index.toString()} />
+			{data.map((url, index) => (
+				<Reaction key={index.toString()} url={url} />
 			))}
 		</Stack>
 	);
 };
 
-export const Reaction = () => {
+export const Reaction = ({ url }: { url: string }) => {
 	const { setReaction, removeReaction } = useReactionStore((state) => state);
 	const handler = () => {
 		setReaction(url);
@@ -21,7 +21,7 @@ export const Reaction = () => {
 			removeReaction();
 		}, 3000);
 	};
-	const url = "/chi.gif";
+	// const url = "/chi.gif";
 	return (
 		<Button
 			variant="contained"
@@ -34,7 +34,7 @@ export const Reaction = () => {
 			onClick={handler}
 		>
 			<Stack direction="row" spacing={2} alignItems="center" pr={1}>
-				<Box sx={{ minWidth: 64, minHeight: 64, backgroundImage: "url('/chi.gif')", backgroundRepeat: "no-repeat", borderRadius: 50, backgroundSize: "cover" }} />
+				<Box sx={{ minWidth: 64, minHeight: 64, backgroundImage: `url('${url}')`, backgroundRepeat: "no-repeat", borderRadius: 50, backgroundSize: "cover" }} />
 				<Typography variant="h5">12</Typography>
 			</Stack>
 		</Button>
