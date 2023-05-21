@@ -23,7 +23,7 @@ export const Comment = (props: {
         p: 1,
       }}
     >
-      <Avatar />
+      <Avatar src={`https://robohash.org/${username}`} />
       <Stack>
         <Typography variant="body1" fontWeight="bold" color="secondary.main">
           {username}
