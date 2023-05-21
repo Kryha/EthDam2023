@@ -24,6 +24,8 @@ The viewer uses the client to connect with the chat* to send messages. When the 
 # running the project
 
 ```
+npm i
+npm run build
 npm run start-ssb
 npm run start-node
 cd contracts; npm run deploy
