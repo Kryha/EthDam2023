@@ -33,6 +33,11 @@ cd contracts; npm run deploy
 
 # Architecture
 
+![p2p-chat](./assets/p2p.png)
+![blockchain](./assets/blockchain.png)
+![ditributing](./assets/distributing.png)
+
+## Mermaid-diagrams
 ```mermaid
 flowchart TB
     bc[(Blockchain)]
@@ -44,9 +49,6 @@ flowchart TB
     client1 & client2 <--> client3
     client1 <--> client2
 ```
-
-# voting
-
 ```mermaid
 sequenceDiagram
     app->>ssb: ask question (a.k.a. send a message)
