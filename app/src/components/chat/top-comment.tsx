@@ -27,6 +27,7 @@ export const TopComment = ({ comment, ...rest }: Props) => {
 	}, [id, count]);
 
 	const onSuccess = (data: number) => {
+		// @ts-ignore
 		if (Boolean(data > top?.count)) {
 			client.removeQueries(["comments"]);
 			setTop(comment);
