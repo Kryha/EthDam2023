@@ -34,7 +34,7 @@ export const Form = () => {
     if (messageId && !Array.isArray(slider) && slider > 0) {
       await callUpvote(messageId, slider);
     }
-  }, [messageId, slider]);
+  }, [messageId]);
 
   return (
     <Stack
