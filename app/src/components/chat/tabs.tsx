@@ -23,7 +23,12 @@ function TabPanel(props: TabPanelProps) {
 		<Stack
 			direction="column-reverse"
 			component="div"
-			sx={{ width: value === index ? 1 : 0, flexGrow: value === index ? 1 : 0, overflowY: "scroll", transition: "all 1s ease-in-out" }}
+			sx={{
+				width: value === index ? 1 : 0,
+				flexGrow: value === index ? 1 : 0,
+				overflowY: "scroll",
+				transition: "all 1s ease-in-out",
+			}}
 			role="tabpanel"
 			hidden={value !== index}
 			id={`simple-tabpanel-${index}`}
@@ -47,14 +52,10 @@ export const getComments = async (): Promise<ApiGetMessage> => {
 	return response.data;
 };
 
-export const useComments = () => {
-	return useQuery(["comments"], getComments, {
+export function BasicTabs() {
+	const { data } = useQuery("comments", getComments, {
 		refetchInterval: 250,
 	});
-};
-
-export function BasicTabs() {
-	const { data } = useComments();
 	const [value, setValue] = useState(0);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -62,7 +63,14 @@ export function BasicTabs() {
 	};
 
 	return (
-		<Stack sx={{ flexGrow: 1, position: "relative", overflow: "scroll", borderBottom: 1 }}>
+		<Stack
+			sx={{
+				flexGrow: 1,
+				position: "relative",
+				overflow: "scroll",
+				borderBottom: 1,
+			}}
+		>
 			<Stack
 				spacing={2}
 				direction="row"
@@ -91,7 +99,7 @@ export function BasicTabs() {
 					sx={{ alignItems: "center" }}
 				>
 					<StyledTabs label={<Typography variant="button">Top</Typography>} {...a11yProps(0)} />
-					<StyledTabs label={<Typography variant="button">All</Typography>} {...a11yProps(1)} />
+					<StyledTabs label={<Typography variant="button">💩</Typography>} {...a11yProps(1)} />
 				</MUITabs>
 			</Stack>
 			<TabPanel value={value} index={0}>

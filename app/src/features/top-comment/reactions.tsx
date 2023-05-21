@@ -1,6 +1,7 @@
 import { Box, Button, Stack, Tooltip, Typography, Zoom } from "@mui/material";
 import { useCommentsStore } from "@store/comments";
 import { useReactionStore } from "@store/reaction";
+import hash from "object-hash";
 import {
   useContractConnectUpvote,
   useContractGetMessageById,
@@ -10,8 +11,6 @@ import { useQuery } from "react-query";
 const REACTION_IDS = ["/pepe.gif", "/snoop.gif", "/pulp.gif", "/minion.gif"];
 
 export const Reactions = () => {
-  const { top } = useCommentsStore((state) => state);
-
   return (
     <Stack
       spacing={2}
@@ -26,15 +25,14 @@ export const Reactions = () => {
 };
 
 export const Reaction = ({ url }: { url: string }) => {
-  const topMessageId = "string";
-  //const combinedId = hash({ url, topMessageId });
-  const combinedId = "str";
+  const { top } = useCommentsStore((state) => state);
+  const combinedId = hash({ url, topMessageId: top?.id || "UNKNOWN" });
 
   const { callUpvote } = useContractConnectUpvote();
   const { callGetMessageById } = useContractGetMessageById();
 
   const { data: count } = useQuery(
-    "count",
+    "count" + combinedId,
     () => callGetMessageById(combinedId),
     { refetchInterval: 500 }
   );
