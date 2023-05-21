@@ -4,7 +4,7 @@
   "sourceName": "src/MessageVoting.sol",
   "abi": [{
       "inputs": [{
-          "internalType": "bytes32",
+          "internalType": "string",
           "name": "_messageId",
           "type": "string"
         },
@@ -21,24 +21,21 @@
     },
     {
       "inputs": [{
-        "internalType": "bytes32",
+        "internalType": "string",
         "name": "_messageId",
-        "type": "bytes32"
+        "type": "string"
       }],
       "name": "getMessageById",
-      "outputs": [
-        {
-          "internalType": "int256",
-          "name": "",
-          "type": "int256"
-        }
-      ],
+      "outputs": [{
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      }],
       "stateMutability": "view",
       "type": "function"
     },
     {
-      "inputs": [
-        {
+      "inputs": [{
           "internalType": "string",
           "name": "_messageId",
           "type": "string"
@@ -55,21 +52,17 @@
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
+      "inputs": [{
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }],
       "name": "voteCount",
-      "outputs": [
-        {
-          "internalType": "int256",
-          "name": "",
-          "type": "int256"
-        }
-      ],
+      "outputs": [{
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      }],
       "stateMutability": "view",
       "type": "function"
     }
