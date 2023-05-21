@@ -7,7 +7,7 @@ export const TopComment = () => {
 	const { top } = useCommentsStore((state) => state);
 
 	return (
-		<Slide in={Boolean(top)} direction="up" mountOnEnter unmountOnExit>
+		<Slide in={Boolean(top?.id)} direction="up" mountOnEnter unmountOnExit timeout={{ appear: 12000, enter: 12000, exit: 12000 }}>
 			<Stack
 				component={Paper}
 				spacing={2}
@@ -22,12 +22,16 @@ export const TopComment = () => {
 					justifyContent: "center",
 					alignItems: "center",
 					zIndex: 100,
+					bgcolor: "primary.main",
+					background: "linear-gradient(70deg, #67CFEB, #A9EA50, #CA38EB,#67CFEB, #A9EA50)",
+					backgroundSize: "400% 100%",
+					animation: "gradient 5s ease alternate-reverse infinite",
 				}}
 			>
-				<Typography variant="h4" color="secondary">
+				<Typography variant="h3" color="primary.dark">
 					{top?.content.message}
 				</Typography>
-				<Typography variant="h4" color="secondary">
+				<Typography variant="h3" color="primary.dark">
 					{top?.count}
 					<North />
 				</Typography>
