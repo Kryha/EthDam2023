@@ -3,7 +3,7 @@ import * as ssb from "@blockbusters/ssb-core";
 import { generateSpam } from "@blockbusters/util-generate-spam";
 import ssbKeys from "ssb-keys";
 
-const MAX_USERS = 50;
+const MAX_USERS = 20;
 const MAX_MESSAGES_A_SECOND = 500;
 const RANDOM_SPECIAL_CHANCE = 0.005;
 const RANDOM_NEW_USER_CHANCE = 0.05;
