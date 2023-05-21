@@ -82,14 +82,20 @@ export const TopComment = (props: Props) => {
           <IconButton
             size="small"
             sx={{ bgcolor: "primary.main" }}
-            onClick={() => callUpvote(messageId, 1)}
+            onClick={() => {
+              callUpvote(messageId, 1);
+              setCount((count || 0) + 1);
+            }}
           >
             <North fontSize="small" color="secondary" />
           </IconButton>
           <IconButton
             size="small"
             sx={{ bgcolor: "primary.main" }}
-            onClick={() => callDownvote(messageId, 1)}
+            onClick={() => {
+              callDownvote(messageId, 1);
+              setCount((count || 0) + 1);
+            }}
           >
             <South fontSize="small" color="secondary" />
           </IconButton>
