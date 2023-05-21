@@ -93,8 +93,7 @@ export const useContractGetMessageById = () => {
         signer
       );
       const transaction = await contract.getMessageById(messageId);
-      console.log("tr", transaction)
-      return transaction;
+      return Number(transaction);
     }
   };
 
