@@ -20,6 +20,7 @@ The viewer uses the client to connect with the chat* to send messages. When the 
 - Enabling the streamer to flag questions as answered.
   - Rewarding posing questions that is being answered with that user getting more tokens.
   - Giving back tokens used for upvoting when.
+- The voting could be extended with ZK to only show the results for the streamer which would add some freedom to the streamer for selecting questions that are not toprated.
 
 # running the project
 
