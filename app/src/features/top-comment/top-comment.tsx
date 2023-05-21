@@ -1,20 +1,35 @@
 import { North } from "@mui/icons-material";
-import { Paper, Slide, Stack, Typography } from "@mui/material";
+import { Paper, Slide, Stack, Typography, Zoom } from "@mui/material";
 import { useCommentsStore } from "@store/comments";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const TopComment = () => {
 	const { top } = useCommentsStore((state) => state);
+	const [prev, setPrev] = useState(top);
+	const [changed, setChanged] = useState(Boolean(top));
+	useEffect(() => {
+		if (prev !== top) {
+			setPrev(undefined);
+			setChanged(true);
+			setTimeout(() => {
+				setPrev(top);
+			}, 1200);
+			setTimeout(() => {
+				setChanged(false);
+			}, 1200);
+		}
+	}, [top]);
 
 	return (
-		<Slide in={Boolean(top?.id)} direction="up" mountOnEnter unmountOnExit timeout={{ appear: 12000, enter: 12000, exit: 12000 }}>
+		<Slide in={Boolean(prev)} direction="up" mountOnEnter unmountOnExit timeout={{ appear: 600, enter: 1200 }}>
 			<Stack
 				component={Paper}
 				spacing={2}
 				direction="row"
 				sx={{
 					position: "absolute",
-					left: 0,
+					left: changed ? "50%" : 0,
+					transform: changed ? "scale(1.9)" : "scale(1)",
 					bottom: "5%",
 					p: 2,
 					borderTopLeftRadius: 0,
