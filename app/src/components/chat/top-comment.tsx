@@ -49,7 +49,9 @@ export const TopComment = (props: Props) => {
       }}
     >
       <Stack direction="row" spacing={2} sx={{ p: 1 }}>
-        <Avatar />
+        <Avatar
+          src={`https://api.dicebear.com/6.x/open-peeps/svg?seed=${username}`}
+        />
         <Stack>
           <Typography variant="body1" fontWeight="bold" color="secondary">
             {username}
