@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build --workspaces --if-present",
-    "start-ssb": "npx ssb-server start"
+    "start-ssb": "npx ssb-server start",
+    "start-node": "npm run start-node --workspace=contracts"
   },
   "repository": {
     "type": "git",

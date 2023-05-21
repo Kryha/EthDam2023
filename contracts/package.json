@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-node": "npx hardhat node",
+    "compile": "npx hardhat compile",
+    "deploy": "npx hardhat run scripts/deploy.ts --network localhost",
+    "mv-contract": "mv artifacts/src/MessageVoting.sol/MessageVoting.json ../app/src/abi/MessageVoting.json",
+    "predeploy": "cd $INIT_CWD; npm run compile",
+    "postdeploy": "npm run mv-contract"
   },
   "keywords": [],
   "author": "",
