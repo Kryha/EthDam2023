@@ -98,11 +98,11 @@ export const useContractGetMessageById = () => {
     }
   };
 
-  // const getVoteCountByMessageId = async (messageId: string) => {
-  //   const tr = await callGetMessageById(messageId);
-  //   const votes = Number(tr[1]);
-  //   return votes;
-  // };
+  const getVoteCountByMessageId = async (messageId: string) => {
+    const tr = await callGetMessageById(messageId);
+    const votes = Number(tr);
+    return votes;
+  };
 
-  return { callGetMessageById };
+  return { callGetMessageById, getVoteCountByMessageId };
 };

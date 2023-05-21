@@ -16,12 +16,11 @@ export const TopComment = (props: Props) => {
 
 	const [count, setCount] = useState(_count);
 
-	//const { getVoteCountByMessageId } = useContractGetMessageById();
+	const { getVoteCountByMessageId } = useContractGetMessageById();
 
 	useMemo(async () => {
 		if (_count === undefined) {
-      //setCount(await getVoteCountByMessageId(messageId));
-			setCount(0);
+      setCount(await getVoteCountByMessageId(messageId));
 		}
 	}, [messageId, _count]);
 
