@@ -1,7 +1,7 @@
 import { Box, Button, Stack, Tooltip, Typography, Zoom } from "@mui/material";
 import { useCommentsStore } from "@store/comments";
 import { useReactionStore } from "@store/reaction";
-import hash from "object-hash";
+//import hash from "object-hash";
 import { useContractConnectUpvote, useContractGetMessageById } from "../../services/contract-call";
 import { useQuery } from "react-query";
 
@@ -21,7 +21,8 @@ export const Reactions = () => {
 
 export const Reaction = ({ url }: { url: string }) => {
 	const topMessageId = "string";
-	const combinedId = hash({ url, topMessageId });
+	//const combinedId = hash({ url, topMessageId });
+	const combinedId = "str";
 
 	const { callUpvote } = useContractConnectUpvote();
 	const { callGetMessageById } = useContractGetMessageById();

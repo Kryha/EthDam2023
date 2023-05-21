@@ -40,8 +40,7 @@ export const useContractConnectUpvote = () => {
         MessageVoting.abi,
         signer
       );
-      await contract.upvote(messageId, amount);
-      const transaction = await contract.upvote(messageId);
+      const transaction = await contract.upvote(messageId, amount);
       const transactionReceipt = await transaction.wait();
       if (transactionReceipt.status !== 1) {
         alert("error message");
@@ -66,8 +65,7 @@ export const useContractConnectDownvote = () => {
         MessageVoting.abi,
         signer
       );
-      await contract.downvote(messageId, amount);
-      const transaction = await contract.downvote(messageId);
+      const transaction = await contract.downvote(messageId, amount);
       const transactionReceipt = await transaction.wait();
       if (transactionReceipt.status !== 1) {
         alert("error message");
@@ -95,15 +93,16 @@ export const useContractGetMessageById = () => {
         signer
       );
       const transaction = await contract.getMessageById(messageId);
+      console.log("tr", transaction)
       return transaction;
     }
   };
 
-  const getVoteCountByMessageId = async (messageId: string) => {
-    const tr = await callGetMessageById(messageId);
-    const votes = tr || 0;
-    return votes;
-  };
+  // const getVoteCountByMessageId = async (messageId: string) => {
+  //   const tr = await callGetMessageById(messageId);
+  //   const votes = Number(tr[1]);
+  //   return votes;
+  // };
 
-  return { callGetMessageById, getVoteCountByMessageId };
+  return { callGetMessageById };
 };
