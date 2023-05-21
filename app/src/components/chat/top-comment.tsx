@@ -13,6 +13,7 @@ import {
   useContractConnectUpvote,
   useContractGetMessageById,
 } from "../../services/contract-call";
+import { useQuery } from "react-query";
 
 interface Props extends StackProps {
   key: string;
@@ -25,7 +26,6 @@ export const TopComment = (props: Props) => {
   const { key, username, message, count: _count, messageId, ...rest } = props;
 
   const [count, setCount] = useState(_count);
-
   const { callGetMessageById } = useContractGetMessageById();
 
   useMemo(async () => {
@@ -33,6 +33,14 @@ export const TopComment = (props: Props) => {
       setCount(await callGetMessageById(messageId));
     }
   }, [messageId, _count]);
+
+  useQuery(
+    ["count", messageId],
+    async () => {
+      setCount(await callGetMessageById(messageId));
+    },
+    { refetchInterval: 500 }
+  );
 
   const { callUpvote } = useContractConnectUpvote();
   const { callDownvote } = useContractConnectDownvote();
