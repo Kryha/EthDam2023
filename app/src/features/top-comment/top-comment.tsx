@@ -17,6 +17,7 @@ export const TopComment = () => {
 				borderBottomLeftRadius: 0,
 				justifyContent: "center",
 				alignItems: "center",
+				zIndex: 100,
 			}}
 		>
 			<Typography variant="h4" color="secondary">

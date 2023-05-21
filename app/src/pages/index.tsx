@@ -58,7 +58,7 @@ export default function Home() {
 							>
 								<TopComment />
 								<Explosions />
-								<Image
+								{/* <Image
 									src={screen}
 									layout="responsive"
 									// @ts-ignore
@@ -66,7 +66,25 @@ export default function Home() {
 									// @ts-ignore
 									height="62.5%" // 16:10 aspect ratio
 									objectFit="cover"
-								/>
+								/> */}
+								<Stack
+									sx={{
+										width: "100%",
+										pt: "56.25%",
+										position: "relative",
+									}}
+								>
+									<iframe
+										width="100%"
+										height="100%"
+										style={{ position: "absolute", inset: "0" }}
+										src="https://www.youtube.com/embed/iI8BQh9Ic-E?autoplay=1&mute=1&enablejsapi=1&controls=0"
+										title="Livestream"
+										// frameborder="0"
+										allow="autoplay"
+										allowFullScreen
+									/>
+								</Stack>
 							</Stack>
 							<Reactions />
 						</Stack>

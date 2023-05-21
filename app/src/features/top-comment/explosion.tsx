@@ -14,7 +14,7 @@ export const Explosions = () => {
 			// }}
 			timeout={{ appear: 1200, enter: 1200, exit: 0 }}
 		>
-			<Stack sx={{ position: "absolute", inset: 0 }}>
+			<Stack sx={{ position: "absolute", inset: 0, zIndex: 30 }}>
 				<Stack
 					spacing={2}
 					direction="row"
