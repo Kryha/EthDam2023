@@ -1,4 +1,11 @@
+# start-up
+
+npm run start-ssb
+npm run start-node
+cd contracts; npm run deploy
+
 # Architecture
+
 ```mermaid
 flowchart TB
     bc[(Blockchain)]
@@ -12,6 +19,7 @@ flowchart TB
 ```
 
 # voting
+
 ```mermaid
 sequenceDiagram
     app->>ssb: ask question (a.k.a. send a message)
