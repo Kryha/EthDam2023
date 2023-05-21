@@ -92,7 +92,6 @@ export const TopComment = (props: Props) => {
             sx={{ bgcolor: "primary.main" }}
             onClick={() => {
               callUpvote(messageId, 1);
-              setCount((count || 0) + 1);
             }}
           >
             <North fontSize="small" color="secondary" />
@@ -102,7 +101,6 @@ export const TopComment = (props: Props) => {
             sx={{ bgcolor: "primary.main" }}
             onClick={() => {
               callDownvote(messageId, 1);
-              setCount((count || 0) + 1);
             }}
           >
             <South fontSize="small" color="secondary" />
