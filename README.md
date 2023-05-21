@@ -1,4 +1,4 @@
-# Gozzip: Decentralized chat and tokenized 'moderation'
+# GOZZIP: Decentralized chat and tokenized 'moderation'
 
 ## Why?
 
