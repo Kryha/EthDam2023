@@ -98,8 +98,8 @@ export function BasicTabs() {
 					}}
 					sx={{ alignItems: "center" }}
 				>
-					<StyledTabs label={<Typography variant="button">Top</Typography>} {...a11yProps(0)} />
-					<StyledTabs label={<Typography variant="button">💩</Typography>} {...a11yProps(1)} />
+					<StyledTabs label={<Typography variant="h6">Top</Typography>} {...a11yProps(0)} />
+					<StyledTabs label={<Typography variant="h6">💩</Typography>} {...a11yProps(1)} />
 				</MUITabs>
 			</Stack>
 			<TabPanel value={value} index={0}>
