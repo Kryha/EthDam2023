@@ -40,7 +40,7 @@ export type ExtendedMessage = Message & { count: number };
 
 export const TopComments = (props: { messages: Message[] }) => {
 	const { messages } = props;
-	const { getVoteCountByMessageId } = useContractGetMessageById();
+	//const { getVoteCountByMessageId } = useContractGetMessageById();
 	const { setTop } = useCommentsStore((state) => state);
 	const [sortedMessages, setSortedMessages] = useState<ExtendedMessage[]>([]);
 
@@ -48,7 +48,8 @@ export const TopComments = (props: { messages: Message[] }) => {
 		// Adds count
 		const extendedMessages: ExtendedMessage[] = await Promise.all(
 			messages.map(async (message) => {
-				const count = await getVoteCountByMessageId(message.id);
+				//const count = await getVoteCountByMessageId;
+				const count = 0;
 				return { ...message, count };
 			})
 		);
